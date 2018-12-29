@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Csipegeto {
+public class Csipegeto extends Thread {
 
     private JTextField textField1;
     private JPanel panel1;
@@ -35,12 +35,25 @@ public class Csipegeto {
     private File outputFile;
     private ListOfCells cellList1 = new ListOfCells();
     private LinkedList<Integer> jListCells = new LinkedList();
+    public static String workOnFile = "";
 
+    public JPanel getPanel1() {
+        return panel1;
+    }
+
+    public void setPanel1(JPanel panel1) {
+        this.panel1 = panel1;
+    }
 
     public Csipegeto() {
-        playButton.addActionListener(e -> run());
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder);
+                PF1.execute();
+            }
+        });
         button1.addActionListener(f -> openFolder());
-
         chooseOutputFolderButton.addActionListener(g -> openFolder2());
         addCellToListButton.addActionListener(h -> addCellToList());
 
@@ -62,6 +75,8 @@ public class Csipegeto {
                 }
             }
         });
+        openFolder = new File(textField1.getText());
+        outputFile = new File(textField4.getText());
     }
 
     private void removeCellFromList(Integer cellPos) {
@@ -111,48 +126,17 @@ public class Csipegeto {
                 System.out.println("You selected the directory: " + jfc.getSelectedFile());
             }
         }
-
         outputFile = new File(jfc.getSelectedFile(), "output.xlsx");
         textField4.setText(outputFile.toString());
     }
 
-    public void go() {
+    public void run() {
         JFrame frame = new JFrame("PickR by András Laczó");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-    }
+        boolean z = SwingUtilities.isEventDispatchThread();
 
-    public void run() {
-        String path = textField1.getText();
-        final int[] i = {0};
-
-        try {
-            //Files.walk(Paths.get(path))
-            Files.walk(openFolder.toPath())
-                    .filter((p) -> p.toString().endsWith(".xls") || p.toString().endsWith(".xlsx"))
-                    .forEach(item ->
-                    {
-                        ExcelReader r1 = new ExcelReader(item.toString());
-                        List<ExcelData> inList = r1.getData(cellListToEData.convert(cellList1));
-
-                        if (inList != null) {
-                            int colCounter = 0;
-                            for (ExcelData eIn : inList) {
-                                        eIn.setCol(colCounter);
-                                        colCounter++;
-                            }
-
-                            //excelwriter
-                            ExcelWriter w1 = new ExcelWriter(textField4.getText(), "sheet1", i[0]);
-                            w1.putData(inList, item.toString());
-                            i[0]++;
-                        }
-                    });
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in FilesWalk");
-        }
     }
 }

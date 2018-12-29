@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ExcelWriter {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "IOException in ExcelWriter");
             }
         } else { // if exists work at this path
             try {
@@ -42,6 +44,7 @@ public class ExcelWriter {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "IOException in ExcelWriter");
             }
         }
 
@@ -94,19 +97,22 @@ public class ExcelWriter {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (NullPointerException e1) {
+            JOptionPane.showMessageDialog(null, "IOException in ExcelWriter putData");
+        } catch (NullPointerException e1) {
             try {
                 myWorkbook.write(fos);
                 fos.close();
             }
             catch (IOException e3){
                 e3.printStackTrace();
+                JOptionPane.showMessageDialog(null, "IOException in ExcelWriter putData");
             }
             e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "NullPoint in ExcelWriter");
         }
         catch (ClassCastException e2) {
             e2.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ClassCast in ExcelWriter");
         }
 
     }

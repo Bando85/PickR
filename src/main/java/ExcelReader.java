@@ -9,6 +9,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class ExcelReader {
                 fis = new FileInputStream(path);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "File Not Found in ExcelReader");
             }
             if (path.endsWith(".xlsx")) return getDataXSSF(listIn);
             if (path.endsWith(".xls")) return getDataHSSF(listIn);
@@ -51,6 +54,7 @@ public class ExcelReader {
             fis.close();
         } catch (IOException e1) {
             e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
         }
         return listIn;
     }
@@ -71,6 +75,7 @@ public class ExcelReader {
             fis.close();
         } catch (IOException e1) {
             e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
         }
              return listIn;
     }

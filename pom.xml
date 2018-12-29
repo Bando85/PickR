@@ -65,4 +65,15 @@
             <version>4.0.0</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>file:///c:/test/testesb/in/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>file:///c:/test/testesb/in/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
