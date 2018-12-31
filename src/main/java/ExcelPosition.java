@@ -32,4 +32,14 @@ public class ExcelPosition {
     public int convertRow() {
         return (excelRowPos -1 );
     }
+
+    public String toName(int number) {
+        StringBuilder sb = new StringBuilder();
+        while (number-- > 0) {
+            sb.append((char)('A' + (number % 26)));
+            number /= 26;
+        }
+        return sb.reverse().toString();
+    }
+
 }

@@ -1,21 +1,12 @@
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.NumberFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.nio.file.Files;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-
 
 public class Csipegeto extends Thread {
 
@@ -35,7 +26,6 @@ public class Csipegeto extends Thread {
     private File outputFile;
     private ListOfCells cellList1 = new ListOfCells();
     private LinkedList<Integer> jListCells = new LinkedList();
-    public static String workOnFile = "";
 
     public JPanel getPanel1() {
         return panel1;
@@ -77,6 +67,17 @@ public class Csipegeto extends Thread {
         });
         openFolder = new File(textField1.getText());
         outputFile = new File(textField4.getText());
+
+        //Import Cell List from TXT file
+        importCellListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                ListOfCells listOC = importCells.run();
+                modifyJList(listOC);
+
+            }
+        });
     }
 
     private void removeCellFromList(Integer cellPos) {
@@ -97,6 +98,19 @@ public class Csipegeto extends Thread {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Only numbers for row!");
         }
+    }
+
+    private void modifyJList(ListOfCells listOC) {
+        for (Integer k:listOC.getCellList().keySet()) {
+            jListCells.add(k);
+            String col = ExcelColumn.toName(listOC.getCellList().get(k).getCol());
+            String row = Integer.toString(listOC.getCellList().get(k).getRow());
+            String sheetname = listOC.getCellList().get(k).getSheetName();
+
+            ((DefaultListModel) list1.getModel()).addElement(col + row + " in sheet " + sheetname);
+        }
+
+
     }
 
 
@@ -136,7 +150,5 @@ public class Csipegeto extends Thread {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        boolean z = SwingUtilities.isEventDispatchThread();
-
     }
 }
