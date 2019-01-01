@@ -14,12 +14,13 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     private ProgressForm form;
     private JFrame frame;
 
-    public PickRFunctions(String workFolder, String outFolder, File openFolder) {
+    public PickRFunctions(String workFolder, String outFolder, File openFolder, ListOfCells cellList) {
         this.workFolder=workFolder;
         this.outputPath=outFolder;
         this.openFolder=openFolder;
         this.form = new ProgressForm();
         this.frame = new JFrame("PickR by András Laczó");
+        this.cellList1 = cellList;
         frame.setContentPane(this.form.getPanel2());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.setLocationRelativeTo(null);
@@ -31,11 +32,6 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
 
     @Override
     protected Integer doInBackground() throws Exception {
-
-        boolean z = SwingUtilities.isEventDispatchThread();
-        //show progress
-
-
 
         //start operation
         String path = workFolder;

@@ -11,6 +11,7 @@ public final class ExcelColumn {
         }
 
         public static String toName(int number) {
+            number = number + 1;
             StringBuilder sb = new StringBuilder();
             while (number-- > 0) {
                 sb.append((char)('A' + (number % 26)));

@@ -24,6 +24,11 @@ public class Csipegeto extends Thread {
     private JTextField textField5;
     private File openFolder;
     private File outputFile;
+
+    public ListOfCells getCellList1() {
+        return cellList1;
+    }
+
     private ListOfCells cellList1 = new ListOfCells();
     private LinkedList<Integer> jListCells = new LinkedList();
 
@@ -39,7 +44,7 @@ public class Csipegeto extends Thread {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder);
+                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder, cellList1);
                 PF1.execute();
             }
         });
@@ -75,6 +80,7 @@ public class Csipegeto extends Thread {
 
                 ListOfCells listOC = importCells.run();
                 modifyJList(listOC);
+                cellList1 = listOC;
 
             }
         });

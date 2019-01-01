@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,8 +28,9 @@ public class importCells {
         if (file != null) {
             try {
                 FileInputStream fis = new FileInputStream(file);
-                cellList = Files.lines(file.toPath())
+                cellList = Files.lines(file.toPath(), StandardCharsets.ISO_8859_1)
                         .collect(Collectors.toList());
+
                 for (String s : cellList) {
                     String[] arrS = s.split(" ");
                     //1st sheet, 2nd col, 3rd row
