@@ -2,11 +2,20 @@ import org.apache.poi.ss.usermodel.CellType;
 
 public class ExcelData {
     private String name;
-    private String sheetname;
+    private String sheetName;
     private int row;
     private int col;
     private Object value;
     private CellType valueType;
+
+    public ExcelData() {
+    }
+
+    public ExcelData(int r, int c, String sname) {
+        this.row = r;
+        this.col = c;
+        this.sheetName = sname;
+    }
 
     public CellType getValueType() {
         return valueType;
@@ -24,12 +33,12 @@ public class ExcelData {
         this.name = name;
     }
 
-    public String getSheetname() {
-        return sheetname;
+    public String getSheetName() {
+        return sheetName;
     }
 
-    public void setSheetname(String sheetname) {
-        this.sheetname = sheetname;
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
     }
 
     public int getRow() {

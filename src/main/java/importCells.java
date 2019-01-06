@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class importCells {
                 for (String s : cellList) {
                     String[] arrS = s.split(" ");
                     //1st sheet, 2nd col, 3rd row
-                    listOC.addCell(Integer.parseInt(arrS[2]), arrS[1], arrS[0]);
+                    listOC.addCell(Integer.parseInt((arrS[2])), arrS[1], arrS[0]);
                 }
 
             } catch (FileNotFoundException e) {

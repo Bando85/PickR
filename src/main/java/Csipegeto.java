@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.LinkedList;
 
 public class Csipegeto extends Thread {
 
@@ -18,19 +17,13 @@ public class Csipegeto extends Thread {
     private JButton chooseOutputFolderButton;
     private JButton addCellToListButton;
     private JList list1;
+    private ListOfCells cellListData = new ListOfCells();
     private JTextField textField2;
     private JTextField textField3;
     private JButton importCellListButton;
     private JTextField textField5;
     private File openFolder;
     private File outputFile;
-
-    public ListOfCells getCellList1() {
-        return cellList1;
-    }
-
-    private ListOfCells cellList1 = new ListOfCells();
-    private LinkedList<Integer> jListCells = new LinkedList();
 
     public JPanel getPanel1() {
         return panel1;
@@ -44,7 +37,7 @@ public class Csipegeto extends Thread {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder, cellList1);
+                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder, cellListData);
                 PF1.execute();
             }
         });
@@ -77,48 +70,40 @@ public class Csipegeto extends Thread {
         importCellListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                ListOfCells listOC = importCells.run();
-                modifyJList(listOC);
-                cellList1 = listOC;
-
+                addImportToJList(importCells.run());
             }
         });
     }
 
     private void removeCellFromList(Integer cellPos) {
-        Integer cellID = jListCells.get(cellPos);
-        jListCells.remove(cellPos);
-        cellList1.removeCell(cellID);
+        cellListData.remove(cellPos);
         ((DefaultListModel) list1.getModel()).removeElementAt(cellPos);
     }
 
     private void addCellToList() {
         String rowS = textField5.getText();
+        String colS = textField2.getText();
+        String sheet = textField3.getText();
+
         int rowN;
         try {
             rowN = Integer.parseInt(rowS);
-            jListCells.add(cellList1.addCell(rowN, textField2.getText(), textField3.getText()));
-            ((DefaultListModel) list1.getModel()).addElement(textField2.getText() + textField5.getText() + " in sheet "
-                    + textField3.getText());
+            cellListData.addCell(rowN, colS, sheet);
+            ((DefaultListModel) list1.getModel()).addElement(colS + rowS + " in sheet " + sheet);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Only numbers for row!");
         }
     }
 
-    private void modifyJList(ListOfCells listOC) {
-        for (Integer k:listOC.getCellList().keySet()) {
-            jListCells.add(k);
-            String col = ExcelColumn.toName(listOC.getCellList().get(k).getCol());
-            String row = Integer.toString(listOC.getCellList().get(k).getRow());
-            String sheetname = listOC.getCellList().get(k).getSheetName();
-
-            ((DefaultListModel) list1.getModel()).addElement(col + row + " in sheet " + sheetname);
+    private void addImportToJList(ListOfCells listOC) {
+        for (ExcelData cell: listOC) {
+            cellListData.add(cell);
+            String col = ExcelColumn.toName(cell.getCol());
+            String row = Integer.toString(cell.getRow());
+            String sheet = cell.getSheetName();
+            ((DefaultListModel) list1.getModel()).addElement(col + row + " in sheet " + sheet);
         }
-
-
     }
-
 
     public void openFolder() {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());

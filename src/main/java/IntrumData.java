@@ -87,7 +87,7 @@ public class IntrumData {
 
         //all member get the same sheet name
         for (ExcelData e:intrumList){
-            e.setSheetname("ADATLAP");
+            e.setSheetName("ADATLAP");
         }
 
         return intrumList;

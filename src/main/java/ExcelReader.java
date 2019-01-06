@@ -45,7 +45,7 @@ public class ExcelReader {
         try {
             XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
             for (ExcelData e : listIn) {
-                XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetname());
+                XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
                 XSSFRow myRow = mySheet.getRow(e.getRow());
                 XSSFCell myCell = myRow.getCell(e.getCol(),
                         Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
@@ -65,7 +65,7 @@ public class ExcelReader {
         try {
             HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
             for (ExcelData e : listIn) {
-                HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetname());
+                HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
                 HSSFRow myRow = mySheet.getRow(e.getRow());
                 HSSFCell myCell = myRow.getCell(e.getCol(),
                         Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);

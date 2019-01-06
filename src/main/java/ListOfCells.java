@@ -1,27 +1,16 @@
-import java.util.HashMap;
+import java.util.LinkedList;
 
-public class ListOfCells {
-    public HashMap<Integer, ownCell> getCellList() {
-        return cellList;
+public class ListOfCells extends LinkedList<ExcelData> {
+
+    public void addCell(int cellRow, String cellCol, String sheetName) {
+        this.add(new ExcelData(cellRow - 1, ExcelColumn.toNumber(cellCol) - 1, sheetName));
     }
 
-    private HashMap<Integer, ownCell> cellList = new HashMap<>();
-    private Integer counter = 0;
-
-    public Integer getCounter() {
-        return counter;
+    public ListOfCells makeCopy() {
+        ListOfCells output = new ListOfCells();
+        for (ExcelData e:this) {
+            output.add(new ExcelData(e.getRow(),e.getCol(),e.getSheetName()));
+        }
+        return output;
     }
-
-    public Integer addCell (int cellRow, String cellCol, String sheetName) {
-        counter++;
-        cellList.put(counter, new ownCell(cellRow-1, ExcelColumn.toNumber(cellCol)-1,sheetName));
-        return counter;
-    }
-
-    public void removeCell (Integer cellID) {
-        cellList.remove(cellID);
-    }
-
-
-
 }

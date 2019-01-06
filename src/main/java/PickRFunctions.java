@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class PickRFunctions extends SwingWorker<Integer, String> {
 
-    private ListOfCells cellList1 = new ListOfCells();
+    private ListOfCells cellListData;
     private String workFolder;
     private String outputPath;
     private File openFolder;
@@ -20,7 +21,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
         this.openFolder=openFolder;
         this.form = new ProgressForm();
         this.frame = new JFrame("PickR by András Laczó");
-        this.cellList1 = cellList;
+        this.cellListData = cellList;
         frame.setContentPane(this.form.getPanel2());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.setLocationRelativeTo(null);
@@ -46,7 +47,8 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                        publish(item.toString());
 
                         ExcelReader r1 = new ExcelReader(item.toString());
-                        List<ExcelData> inList = r1.getData(cellListToEData.convert(cellList1));
+                        ListOfCells lOC = cellListData.makeCopy();
+                        List<ExcelData> inList = r1.getData(lOC);
 
                         if (inList != null) {
 
