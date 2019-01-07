@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="10" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="30" left="30" bottom="30" right="30"/>
     <constraints>
-      <xy x="63" y="20" width="517" height="565"/>
+      <xy x="42" y="167" width="517" height="555"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -26,16 +26,6 @@
         </constraints>
         <properties>
           <text value="Path"/>
-        </properties>
-      </component>
-      <component id="8e89d" class="javax.swing.JTextField" binding="textField4" default-binding="true">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="C:\test\test.xlsx"/>
         </properties>
       </component>
       <grid id="18178" layout-manager="GridLayoutManager" row-count="7" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -177,6 +167,14 @@
           </component>
         </children>
       </scrollpane>
+      <component id="b8f6e" class="javax.swing.JLabel" binding="OutFolderLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="C:\test"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <inspectionSuppressions>

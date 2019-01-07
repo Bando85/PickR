@@ -2,40 +2,34 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.LinkedList;
 import java.util.List;
 
 public final class PickRFunctions extends SwingWorker<Integer, String> {
 
     private ListOfCells cellListData;
     private String workFolder;
-    private String outputPath;
+    private File outputFile;
     private File openFolder;
-    private String workOnFile;
     private ProgressForm form;
     private JFrame frame;
 
-    public PickRFunctions(String workFolder, String outFolder, File openFolder, ListOfCells cellList) {
+    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList) {
         this.workFolder=workFolder;
-        this.outputPath=outFolder;
+        this.outputFile=outFile;
         this.openFolder=openFolder;
         this.form = new ProgressForm();
         this.frame = new JFrame("PickR by András Laczó");
         this.cellListData = cellList;
         frame.setContentPane(this.form.getPanel2());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //frame.setLocationRelativeTo(null);
         frame.setLocationByPlatform(true);
-
         frame.pack();
         frame.setVisible(true);
     }
 
     @Override
-    protected Integer doInBackground() throws Exception {
+    protected Integer doInBackground() {
 
-        //start operation
-        String path = workFolder;
         final int[] i = {0};
 
         try {
@@ -58,7 +52,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                                 colCounter++;
                             }
                             //excelwriter
-                            ExcelWriter w1 = new ExcelWriter(outputPath, "sheet1", i[0]);
+                            ExcelWriter w1 = new ExcelWriter(outputFile, "sheet1", i[0]);
                             w1.putData(inList, item.toString());
                             i[0]++;
                         }

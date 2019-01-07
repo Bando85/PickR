@@ -12,7 +12,6 @@ public class Csipegeto extends Thread {
     private JTextField textField1;
     private JPanel panel1;
     private JButton playButton;
-    private JTextField textField4;
     private JButton button1;
     private JButton chooseOutputFolderButton;
     private JButton addCellToListButton;
@@ -22,22 +21,21 @@ public class Csipegeto extends Thread {
     private JTextField textField3;
     private JButton importCellListButton;
     private JTextField textField5;
-    private File openFolder;
-    private File outputFile;
+    private JLabel OutFolderLabel;
+    private File inputFolder;
+    private File outputFolder;
 
     public JPanel getPanel1() {
         return panel1;
-    }
-
-    public void setPanel1(JPanel panel1) {
-        this.panel1 = panel1;
     }
 
     public Csipegeto() {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), textField4.getText(), openFolder, cellListData);
+                ExcelOutput ExOut = new ExcelOutput();
+                File outFile = ExOut.createFile(outputFolder);
+                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), outFile, inputFolder, cellListData);
                 PF1.execute();
             }
         });
@@ -63,8 +61,6 @@ public class Csipegeto extends Thread {
                 }
             }
         });
-        openFolder = new File(textField1.getText());
-        outputFile = new File(textField4.getText());
 
         //Import Cell List from TXT file
         importCellListButton.addActionListener(new ActionListener() {
@@ -73,6 +69,10 @@ public class Csipegeto extends Thread {
                 addImportToJList(importCells.run());
             }
         });
+
+        inputFolder = new File(textField1.getText());
+        outputFolder = new File(OutFolderLabel.getText());
+
     }
 
     private void removeCellFromList(Integer cellPos) {
@@ -117,7 +117,7 @@ public class Csipegeto extends Thread {
             }
         }
         textField1.setText(jfc.getSelectedFile().toString());
-        openFolder = jfc.getSelectedFile();
+        inputFolder = jfc.getSelectedFile();
     }
 
     public void openFolder2() {
@@ -131,8 +131,8 @@ public class Csipegeto extends Thread {
                 System.out.println("You selected the directory: " + jfc.getSelectedFile());
             }
         }
-        outputFile = new File(jfc.getSelectedFile(), "output.xlsx");
-        textField4.setText(outputFile.toString());
+        outputFolder = jfc.getSelectedFile();
+        OutFolderLabel.setText(outputFolder.toString());
     }
 
     public void run() {
@@ -141,5 +141,9 @@ public class Csipegeto extends Thread {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
