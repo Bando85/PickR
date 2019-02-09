@@ -21,14 +21,26 @@ import java.util.List;
 public class ExcelReader {
     private String path;
     private FileInputStream fis;
+    private String exclusions;
+    private String idSheet;
+    private int idRow;
+    private String idCol;
+    private String idValue;
+
     private List<String> sheetList = Arrays.asList("", ""); // sheetList for identification
 
-    public ExcelReader(String p) {
-        this.path=p;
+    public ExcelReader(String p, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
+        this.path = p;
+        this.exclusions = exclusions;
+        this.idSheet = idSheet;
+        this.idRow = idRow;
+        this.idCol = idCol;
+        this.idValue = idValue;
+        this.sheetList = sheetList;
     }
 
     public List<ExcelData> getData(List<ExcelData> listIn) {
-        ExcelIdentifier exid = new ExcelIdentifier(path, sheetList);//identify excel files
+        ExcelIdentifier exid = new ExcelIdentifier(path, exclusions, idSheet, idRow, idCol, idValue);//identify excel files
         if (exid.run()) {
             try {
                 fis = new FileInputStream(path);

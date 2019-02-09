@@ -13,13 +13,26 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     private ProgressForm form;
     private JFrame frame;
 
-    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList) {
+    private String exclusions;
+    private String idSheet;
+    private int idRow;
+    private String idCol;
+    private String idValue;
+
+    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
         this.workFolder=workFolder;
         this.outputFile=outFile;
         this.openFolder=openFolder;
         this.form = new ProgressForm();
         this.frame = new JFrame("PickR by András Laczó");
         this.cellListData = cellList;
+
+        this.exclusions = exclusions;
+        this.idSheet = idSheet;
+        this.idRow = idRow;
+        this.idCol = idCol;
+        this.idValue = idValue;
+
         frame.setContentPane(this.form.getPanel2());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationByPlatform(true);
@@ -40,7 +53,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                         //watch progress
                        publish(item.toString());
 
-                        ExcelReader r1 = new ExcelReader(item.toString());
+                        ExcelReader r1 = new ExcelReader(item.toString(), exclusions, idSheet, idRow, idCol, idValue) ;
                         ListOfCells lOC = cellListData.makeCopy();
                         List<ExcelData> inList = r1.getData(lOC);
 

@@ -22,8 +22,17 @@ public class Csipegeto extends Thread {
     private JButton importCellListButton;
     private JTextField textField5;
     private JLabel OutFolderLabel;
+    private JTextField idsheetField;
+    private JTextField idcellField;
+    private JTextField idrowField;
+    private JTextField idvalueField;
+    private JTextField exclusionsField;
     private File inputFolder;
     private File outputFolder;
+
+    public JTextField getIdsheetField() {
+        return idsheetField;
+    }
 
     public JPanel getPanel1() {
         return panel1;
@@ -35,7 +44,8 @@ public class Csipegeto extends Thread {
             public void actionPerformed(ActionEvent e) {
                 ExcelOutput ExOut = new ExcelOutput();
                 File outFile = ExOut.createFile(outputFolder);
-                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), outFile, inputFolder, cellListData);
+                PickRFunctions PF1 = new PickRFunctions(textField1.getText(), outFile, inputFolder, cellListData,exclusionsField.getText(),
+                        idsheetField.getText(), Integer.parseInt(idrowField.getText()),idcellField.getText(),idvalueField.getText());
                 PF1.execute();
             }
         });

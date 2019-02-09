@@ -62,7 +62,8 @@ public class ExcelWriter {
                 }
             }
 
-            myRow.getCell(11, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(openedFile); //show path of actual file
+
+            myRow.getCell((myRow.getLastCellNum()+2), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(openedFile); //show path of actual file
 
             fos = new FileOutputStream(outputFile);
             myWorkbook.write(fos);
