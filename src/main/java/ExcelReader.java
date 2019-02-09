@@ -4,6 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -20,7 +21,7 @@ import java.util.List;
 public class ExcelReader {
     private String path;
     private FileInputStream fis;
-    private List<String> sheetList = Arrays.asList("ADATLAP", "FEDLAP"); // sheetList for identification
+    private List<String> sheetList = Arrays.asList("", ""); // sheetList for identification
 
     public ExcelReader(String p) {
         this.path=p;
@@ -86,7 +87,6 @@ public class ExcelReader {
             eDataOutput.setValue(inputCell.getRichStringCellValue());
             eDataOutput.setValueType(CellType.STRING);
         }
-
         if (inputCell.getCellType() == CellType.NUMERIC) {
             eDataOutput.setValue(inputCell.getNumericCellValue());
             eDataOutput.setValueType(CellType.NUMERIC);
@@ -100,8 +100,23 @@ public class ExcelReader {
             eDataOutput.setValueType(CellType.ERROR);
         }
         if (inputCell.getCellType() == CellType.FORMULA) {
-            eDataOutput.setValue(inputCell.getCellFormula());
-            eDataOutput.setValueType(CellType.FORMULA);
+
+            if (inputCell.getCachedFormulaResultType() == CellType.NUMERIC) {
+                eDataOutput.setValue(inputCell.getNumericCellValue());
+                eDataOutput.setValueType(CellType.NUMERIC);
+            }
+            if (inputCell.getCachedFormulaResultType() == CellType.STRING) {
+                eDataOutput.setValue(inputCell.getStringCellValue());
+                eDataOutput.setValueType(CellType.STRING);
+            }
+            if (inputCell.getCellType() == CellType.BOOLEAN) {
+                eDataOutput.setValue(inputCell.getBooleanCellValue());
+                eDataOutput.setValueType(CellType.BOOLEAN);
+            }
+            if (inputCell.getCellType() == CellType.ERROR) {
+                eDataOutput.setValue(inputCell.getErrorCellValue());
+                eDataOutput.setValueType(CellType.ERROR);
+            }
         }
     }
 }

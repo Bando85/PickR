@@ -18,9 +18,9 @@ public class ExcelIdentifier {
         if (path.contains("előzmény") || path.contains("adatok")) return false;
 
         //see if contains the sheetList
-        if (path.endsWith(".xlsx")) return getDataXSSF();
-        if (path.endsWith(".xls")) return getDataHSSF();
-        return false;
+        //if (path.endsWith(".xlsx")) return getDataXSSF();
+        //if (path.endsWith(".xls")) return getDataHSSF();
+        return true;
 
     }
 
