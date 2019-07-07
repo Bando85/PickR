@@ -5,20 +5,12 @@ import java.util.Date;
 
 class Main {
 
-    public static String var22 = "";
-
     public static void main(String[] args) {
-
-
-
-        // ExcelPosition expos1 = new ExcelPosition("AA",12);// test the excelpos class
-        //int a = expos1.convertCol();
-        //int b = expos1.convertRow();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date1 = null;
         try {
-            date1 = sdf.parse("2019-03-01");
+            date1 = sdf.parse("2019-08-01");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -36,6 +28,8 @@ class Main {
                     frame.setVisible(true);
                 }
             });
+        } else {
+            JOptionPane.showMessageDialog(null, "Your license is expired!");
         }
     }
 }

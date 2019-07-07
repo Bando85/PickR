@@ -28,13 +28,16 @@ public class ExcelIdentifier {
     }
 
     public Boolean run() {
-        //first if file name contains "előzmény", "adatok" it returns null
+        //first if file name contains the specific user input it returns null
         if (!this.exclusions.equals("")) {
             String[] exArr = this.exclusions.split(",");
             for (String e : exArr) {
                 if (path.contains(e)) return false;
             }
         }
+
+        //if user don't want identification then leaves the fields blank
+        if (this.idSheet.equals("")) return true;
 
         //see if contains the sheetList
         if (path.endsWith(".xlsx")) return getDataXSSF();

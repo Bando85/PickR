@@ -19,7 +19,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     private String idCol;
     private String idValue;
 
-    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
+    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList, String exclusions, String idSheet, String idRowText, String idCol, String idValue) {
         this.workFolder=workFolder;
         this.outputFile=outFile;
         this.openFolder=openFolder;
@@ -29,7 +29,13 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
 
         this.exclusions = exclusions;
         this.idSheet = idSheet;
-        this.idRow = idRow;
+
+        try {
+            this.idRow = Integer.parseInt(idRowText);
+        } catch (NumberFormatException n){
+
+        }
+
         this.idCol = idCol;
         this.idValue = idValue;
 

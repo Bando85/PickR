@@ -42,10 +42,13 @@ public class Csipegeto extends Thread {
         playButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inputFolder = new File(textField1.getText());
+                outputFolder = new File(OutFolderLabel.getText());
+
                 ExcelOutput ExOut = new ExcelOutput();
                 File outFile = ExOut.createFile(outputFolder);
                 PickRFunctions PF1 = new PickRFunctions(textField1.getText(), outFile, inputFolder, cellListData,exclusionsField.getText(),
-                        idsheetField.getText(), Integer.parseInt(idrowField.getText()),idcellField.getText(),idvalueField.getText());
+                        idsheetField.getText(), idrowField.getText(),idcellField.getText(),idvalueField.getText());
                 PF1.execute();
             }
         });
@@ -109,7 +112,7 @@ public class Csipegeto extends Thread {
         for (ExcelData cell: listOC) {
             cellListData.add(cell);
             String col = ExcelColumn.toName(cell.getCol());
-            String row = Integer.toString(cell.getRow());
+            String row = Integer.toString(cell.getRow()+1);
             String sheet = cell.getSheetName();
             ((DefaultListModel) list1.getModel()).addElement(col + row + " in sheet " + sheet);
         }
@@ -124,10 +127,10 @@ public class Csipegeto extends Thread {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             if (jfc.getSelectedFile().isDirectory()) {
                 System.out.println("You selected the directory: " + jfc.getSelectedFile());
+                textField1.setText(jfc.getSelectedFile().toString());
+                inputFolder = jfc.getSelectedFile();
             }
         }
-        textField1.setText(jfc.getSelectedFile().toString());
-        inputFolder = jfc.getSelectedFile();
     }
 
     public void openFolder2() {
@@ -139,10 +142,10 @@ public class Csipegeto extends Thread {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             if (jfc.getSelectedFile().isDirectory()) {
                 System.out.println("You selected the directory: " + jfc.getSelectedFile());
+                outputFolder = jfc.getSelectedFile();
+                OutFolderLabel.setText(outputFolder.toString());
             }
         }
-        outputFolder = jfc.getSelectedFile();
-        OutFolderLabel.setText(outputFolder.toString());
     }
 
     public void run() {
@@ -153,7 +156,4 @@ public class Csipegeto extends Thread {
         frame.setVisible(true);
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }

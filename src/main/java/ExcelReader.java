@@ -68,6 +68,8 @@ public class ExcelReader {
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
+        }  catch (Exception e) {
+            e.printStackTrace();
         }
         return listIn;
     }
@@ -89,7 +91,9 @@ public class ExcelReader {
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
              return listIn;
     }
 

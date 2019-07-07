@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +43,9 @@ public class importCells {
             } catch (IOException f) {
                 f.printStackTrace();
                 JOptionPane.showMessageDialog(null, "IOException in importCells");
+            } catch (Exception g) {
+                g.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Unhandled Exception in importCells");
             }
         }
         return listOC;
