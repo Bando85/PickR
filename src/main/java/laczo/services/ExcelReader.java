@@ -1,10 +1,12 @@
+package laczo.services;
+
+import laczo.model.RawCellObject;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -39,14 +41,14 @@ public class ExcelReader {
         this.sheetList = sheetList;
     }
 
-    public List<ExcelData> getData(List<ExcelData> listIn) {
+    public List<RawCellObject> getData(List<RawCellObject> listIn) {
         ExcelIdentifier exid = new ExcelIdentifier(path, exclusions, idSheet, idRow, idCol, idValue);//identify excel files
         if (exid.run()) {
             try {
                 fis = new FileInputStream(path);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "File Not Found in ExcelReader");
+                JOptionPane.showMessageDialog(null, "File Not Found in laczo.services.ExcelReader");
             }
             if (path.endsWith(".xlsx")) return getDataXSSF(listIn);
             if (path.endsWith(".xls")) return getDataHSSF(listIn);
@@ -54,10 +56,10 @@ public class ExcelReader {
         return null;
     }
 
-    public List<ExcelData> getDataXSSF(List<ExcelData> listIn) {
+    public List<RawCellObject> getDataXSSF(List<RawCellObject> listIn) {
         try {
             XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
-            for (ExcelData e : listIn) {
+            for (RawCellObject e : listIn) {
                 XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
                 XSSFRow myRow = mySheet.getRow(e.getRow());
                 XSSFCell myCell = myRow.getCell(e.getCol(),
@@ -76,10 +78,10 @@ public class ExcelReader {
 
 
 
-    public List<ExcelData> getDataHSSF(List<ExcelData> listIn) {
+    public List<RawCellObject> getDataHSSF(List<RawCellObject> listIn) {
         try {
             HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
-            for (ExcelData e : listIn) {
+            for (RawCellObject e : listIn) {
                 HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
                 HSSFRow myRow = mySheet.getRow(e.getRow());
                 HSSFCell myCell = myRow.getCell(e.getCol(),
@@ -98,7 +100,7 @@ public class ExcelReader {
     }
 
     //generic method to use both XSSF and HSSF cell
-    public <C extends Cell> void setCellStyleAndValue(ExcelData eDataOutput, C inputCell) {
+    public <C extends Cell> void setCellStyleAndValue(RawCellObject eDataOutput, C inputCell) {
         if (inputCell.getCellType() == CellType.STRING) {
             eDataOutput.setValue(inputCell.getRichStringCellValue());
             eDataOutput.setValueType(CellType.STRING);

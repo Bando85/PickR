@@ -1,6 +1,6 @@
+package laczo.services;
 
-
-public class ExcelPosition {
+public final class ExcelPosition {
     private String excelColPos;
     private int excelRowPos;
 
@@ -30,7 +30,7 @@ public class ExcelPosition {
     }
 
     public int convertRow() {
-        return (excelRowPos -1 );
+        return (excelRowPos - 1);
     }
 
     public String toName(int number) {

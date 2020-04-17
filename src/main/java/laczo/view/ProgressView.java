@@ -1,6 +1,8 @@
+package laczo.view;
+
 import javax.swing.*;
 
-public class ProgressForm {
+public class ProgressView {
     private JPanel panel2;
     private JLabel fileLabel;
 
@@ -12,10 +14,6 @@ public class ProgressForm {
         this.panel2 = panel2;
     }
 
-    public ProgressForm() {
-
-    }
-
     public JLabel getFileLabel() {
         return fileLabel;
     }
@@ -23,4 +21,5 @@ public class ProgressForm {
     public void setFileLabel(String fileLabel) {
         this.fileLabel.setText(fileLabel);
     }
+
 }

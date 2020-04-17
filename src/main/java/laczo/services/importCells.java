@@ -1,3 +1,7 @@
+package laczo.services;
+
+import laczo.model.ListOfCells;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -28,24 +32,24 @@ public class importCells {
         if (file != null) {
             try {
                 FileInputStream fis = new FileInputStream(file);
-                cellList = Files.lines(file.toPath(), StandardCharsets.ISO_8859_1)
+                cellList = Files.lines(file.toPath(), StandardCharsets.UTF_8)
                         .collect(Collectors.toList());
 
                 for (String s : cellList) {
-                    String[] arrS = s.split(" ");
+                    String[] arrS = s.split(";");
                     //1st sheet, 2nd col, 3rd row
                     listOC.addCell(Integer.parseInt((arrS[2])), arrS[1], arrS[0]);
                 }
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "File Not Found in importCells");
+                JOptionPane.showMessageDialog(null, "File Not Found in laczo.services.importCells");
             } catch (IOException f) {
                 f.printStackTrace();
-                JOptionPane.showMessageDialog(null, "IOException in importCells");
+                JOptionPane.showMessageDialog(null, "IOException in laczo.services.importCells");
             } catch (Exception g) {
                 g.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Unhandled Exception in importCells");
+                JOptionPane.showMessageDialog(null, "Unhandled Exception in laczo.services.importCells");
             }
         }
         return listOC;

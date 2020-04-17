@@ -1,3 +1,5 @@
+package laczo.services;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import javax.swing.*;
 import java.io.File;
@@ -36,7 +38,7 @@ public final class ExcelOutput {
         } catch (
                 IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in ExcelOutput");
+            JOptionPane.showMessageDialog(null, "IOException in laczo.services.ExcelOutput");
             return null;
         }
     }

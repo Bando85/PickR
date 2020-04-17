@@ -1,3 +1,5 @@
+package laczo.services;
+
 public final class ExcelColumn {
 
         private ExcelColumn() {}

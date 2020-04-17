@@ -1,3 +1,9 @@
+package laczo.services;
+
+import laczo.model.ListOfCells;
+import laczo.model.RawCellObject;
+import laczo.view.ProgressView;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +16,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     private String workFolder;
     private File outputFile;
     private File openFolder;
-    private ProgressForm form;
+    private ProgressView form;
     private JFrame frame;
 
     private String exclusions;
@@ -23,7 +29,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
         this.workFolder=workFolder;
         this.outputFile=outFile;
         this.openFolder=openFolder;
-        this.form = new ProgressForm();
+        this.form = new ProgressView();
         this.frame = new JFrame("PickR by András Laczó");
         this.cellListData = cellList;
 
@@ -61,12 +67,12 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
 
                         ExcelReader r1 = new ExcelReader(item.toString(), exclusions, idSheet, idRow, idCol, idValue) ;
                         ListOfCells lOC = cellListData.makeCopy();
-                        List<ExcelData> inList = r1.getData(lOC);
+                        List<RawCellObject> inList = r1.getData(lOC);
 
                         if (inList != null) {
 
                             int colCounter = 0;
-                            for (ExcelData eIn : inList) {
+                            for (RawCellObject eIn : inList) {
                                 eIn.setCol(colCounter);
                                 colCounter++;
                             }

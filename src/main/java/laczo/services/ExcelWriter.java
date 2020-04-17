@@ -1,8 +1,8 @@
-import org.apache.poi.ss.usermodel.CellStyle;
+package laczo.services;
+
+import laczo.model.RawCellObject;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,7 +18,7 @@ public class ExcelWriter {
     private FileOutputStream fos;
     private XSSFWorkbook myWorkbook;
 
-    //ExcelWriter's constructor
+    //laczo.services.ExcelWriter's constructor
     public ExcelWriter(File f, String s, int r) {
         this.outputFile = f;
         this.sheetname = s;
@@ -30,18 +30,18 @@ public class ExcelWriter {
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in ExcelWriter");
+            JOptionPane.showMessageDialog(null, "IOException in laczo.services.ExcelWriter");
         }
     }
 
-    public void putData(List<ExcelData> listOut, String openedFile) {
+    public void putData(List<RawCellObject> listOut, String openedFile) {
 
         try {
 
             XSSFSheet mySheet = myWorkbook.getSheet(sheetname);
             XSSFRow myRow = mySheet.createRow(row);
 
-            for (ExcelData e : listOut) {
+            for (RawCellObject e : listOut) {
 
                 if (e.getValue() != null) {
                     CellType cType = e.getValueType();
@@ -71,33 +71,21 @@ public class ExcelWriter {
 
         } catch (IOException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in ExcelWriter putData");
+            JOptionPane.showMessageDialog(null, "IOException in laczo.services.ExcelWriter putData");
         } catch (NullPointerException e1) {
             try {
                 myWorkbook.write(fos);
                 fos.close();
             } catch (IOException e3) {
                 e3.printStackTrace();
-                JOptionPane.showMessageDialog(null, "IOException in ExcelWriter putData");
+                JOptionPane.showMessageDialog(null, "IOException in laczo.services.ExcelWriter putData");
             }
             e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "NullPoint in ExcelWriter");
+            JOptionPane.showMessageDialog(null, "NullPoint in laczo.services.ExcelWriter");
         } catch (ClassCastException e2) {
             e2.printStackTrace();
-            JOptionPane.showMessageDialog(null, "ClassCast in ExcelWriter");
+            JOptionPane.showMessageDialog(null, "ClassCast in laczo.services.ExcelWriter");
         }
 
     }
 }
-/*if (false) { //this never runs
-                    if (e.getName().equals("orderDate")) {
-                        myRow.getCell(e.getCol(),
-                                Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(DateUtil.getJavaDate(((Double) e.getValue()).doubleValue()));
-
-                        // date cellstyle formatting
-                        CellStyle cellStyle;
-                        cellStyle = myWorkbook.createCellStyle();
-                        cellStyle.setDataFormat((short) 14);
-                        myRow.getCell(e.getCol()).setCellStyle(cellStyle);
-                    }
-                }*/

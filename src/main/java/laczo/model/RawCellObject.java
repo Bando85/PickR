@@ -1,17 +1,20 @@
+package laczo.model;
+
 import org.apache.poi.ss.usermodel.CellType;
 
-public class ExcelData {
+public class RawCellObject {
     private String name;
     private String sheetName;
+    private String workbookName;
     private int row;
     private int col;
     private Object value;
     private CellType valueType;
 
-    public ExcelData() {
+    public RawCellObject() {
     }
 
-    public ExcelData(int r, int c, String sname) {
+    public RawCellObject(int r, int c, String sname) {
         this.row = r;
         this.col = c;
         this.sheetName = sname;
@@ -63,5 +66,13 @@ public class ExcelData {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public String getWorkbookName() {
+        return workbookName;
+    }
+
+    public void setWorkbookName(String workbookName) {
+        this.workbookName = workbookName;
     }
 }
