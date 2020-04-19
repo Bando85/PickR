@@ -13,7 +13,7 @@ public class Model {
     private Path outputFilePath;
     private String idSheetName;
     private String idCellColumn;
-    private int idCellRow;
+    private Integer idCellRow;
     private String idValue;
     private String exculdeFileNameLike;
     private DefaultListModel<String> cellListViewModel = new DefaultListModel<>();

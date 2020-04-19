@@ -4,32 +4,42 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import javax.swing.*;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ExcelIdentifier {
     private String path;
     private String exclusions;
     private String idSheet;
-    private int idRow;
+    private Integer idRow;
     private String idCol;
     private String idValue;
+    private Workbook workbook;
+
+    private static FileInputStream fis;
 
 
-    public ExcelIdentifier(String path, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
+    public ExcelIdentifier(String path, String exclusions, String idSheet, Integer idRow, String idCol, String idValue) {
         this.path = path;
         this.exclusions = exclusions;
         this.idSheet = idSheet;
         this.idRow = idRow;
         this.idCol = idCol;
         this.idValue = idValue;
+        this.workbook = null;
     }
 
-    public Boolean run() {
+    public Boolean filterByFileName() {
         //first if file name contains the specific user input it returns null
         if (!this.exclusions.equals("")) {
             String[] exArr = this.exclusions.split(",");
@@ -37,56 +47,52 @@ public class ExcelIdentifier {
                 if (path.contains(e)) return false;
             }
         }
+        return true;
+    }
+
+    public Workbook run() {
+
+        Workbook workbook = null;
+
+        //see if contains the sheetList
+        try {
+            if (path.endsWith(".xlsx")) {
+                workbook = new XSSFWorkbook(fis);
+                if (isValid(workbook)) return workbook;
+            }
+            if (path.endsWith(".xls")) {
+                workbook = new HSSFWorkbook(fis);
+                if (isValid(workbook)) return workbook;
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Input/Output file exception");
+        }
+        return workbook;
+    }
+
+    private Boolean isValid(Workbook workbook) {
 
         //if user don't want identification then leaves the fields blank
         if (this.idSheet.equals("")) return true;
 
-        //see if contains the sheetList
-        if (path.endsWith(".xlsx")) return getDataXSSF();
-        if (path.endsWith(".xls")) return getDataHSSF();
+        if (workbook.getSheet(this.idSheet) == null) return false;
+
+        Sheet mySheet = workbook.getSheet(this.idSheet);
+        Row myRow = mySheet.getRow(this.idRow - 1);
+        Cell myCell = myRow.getCell(ExcelColumn.toNumber(this.idCol) - 1,
+                Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+
+        if (myCell.getStringCellValue().equals(idValue)) return true;
+
         return false;
+
     }
 
-    private Boolean getDataHSSF() {
-        try {
-            FileInputStream conn = new FileInputStream(path);
-            HSSFWorkbook myWorkbook = new HSSFWorkbook(conn);
-
-            if (myWorkbook.getSheet(this.idSheet) == null) return false;
-
-            HSSFSheet mySheet = myWorkbook.getSheet(this.idSheet);
-            HSSFRow myRow = mySheet.getRow(this.idRow-1);
-            HSSFCell myCell = myRow.getCell(ExcelColumn.toNumber(this.idCol)-1,
-                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-
-            if (myCell.getStringCellValue().equals(idValue)) return true;
-
-            return false;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public static FileInputStream getFis() {
+        return fis;
     }
-    private Boolean getDataXSSF() {
-        try {
-            FileInputStream conn = new FileInputStream(path);
-            XSSFWorkbook myWorkbook = new XSSFWorkbook(conn);
 
-            if (myWorkbook.getSheet(this.idSheet) == null) return false;
-
-            XSSFSheet mySheet = myWorkbook.getSheet(this.idSheet);
-            XSSFRow myRow = mySheet.getRow(this.idRow - 1);
-            XSSFCell myCell = myRow.getCell(ExcelColumn.toNumber(this.idCol)-1,
-                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-
-            if (myCell.getStringCellValue().equals(idValue)) return true;
-
-            return false;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public static void setFis(FileInputStream fis) {
+        ExcelIdentifier.fis = fis;
     }
 }

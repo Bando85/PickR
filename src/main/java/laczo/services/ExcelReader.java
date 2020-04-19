@@ -1,104 +1,60 @@
 package laczo.services;
 
+import laczo.model.Model;
 import laczo.model.RawCellObject;
 import laczo.model.RowFromFile;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.apache.poi.ss.usermodel.*;
 
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
 public class ExcelReader {
-    private String path;
+    private Path path;
+    private Model model;
     private FileInputStream fis;
-    private String exclusions;
-    private String idSheet;
-    private int idRow;
-    private String idCol;
-    private String idValue;
     private RowFromFile rowFromFile;
 
     private List<String> sheetList = Arrays.asList("", ""); // sheetList for identification
 
     //maybe the problem is with identification
 
-    public ExcelReader(String p, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
-        this.path = p;
-        this.exclusions = exclusions;
-        this.idSheet = idSheet;
-        this.idRow = idRow;
-        this.idCol = idCol;
-        this.idValue = idValue;
-        this.sheetList = sheetList;
+    public ExcelReader(Path path, Model model) {
+        this.model = model;
+        this.path = path;
         this.rowFromFile = new RowFromFile();
     }
 
     public RowFromFile getData(List<RawCellObject> listIn) {
-        ExcelIdentifier exid = new ExcelIdentifier(path, exclusions, idSheet, idRow, idCol, idValue);//identify excel files
-        if (exid.run()) {
+        ExcelIdentifier excelIdentifier = new ExcelIdentifier(path.toString(), model.getExculdeFileNameLike(), model.getIdSheetName(),
+                model.getIdCellRow(), model.getIdCellColumn(), model.getIdValue()) ;//identify excel files
+        if (excelIdentifier.filterByFileName()) {
             try {
-                fis = new FileInputStream(path);
+                fis = new FileInputStream(path.toFile());
+                ExcelIdentifier.setFis(fis);
+                Workbook workbook = excelIdentifier.run();
+                if (workbook!=null){
+                   getDataBoth(workbook, listIn);
+                }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "File Not Found in laczo.services.ExcelReader");
+                JOptionPane.showMessageDialog(null, "File Not Found in ExcelReader");
             }
-            if (path.endsWith(".xlsx")) {getDataXSSF(listIn);}
-            if (path.endsWith(".xls")) {getDataHSSF(listIn);}
         }
         return this.rowFromFile;
     }
 
 
-    public void getDataXSSF(List<RawCellObject> listIn) {
-        try {
-            XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
-            for (RawCellObject e : listIn) {
-                XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
-                XSSFRow myRow = mySheet.getRow(e.getRow());
-                XSSFCell myCell = myRow.getCell(e.getCol(),
-                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(myCell);
-            }
-            fis.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void getDataHSSF(List<RawCellObject> listIn) {
-        try {
-            HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
-            for (RawCellObject e : listIn) {
-                HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
-                HSSFRow myRow = mySheet.getRow(e.getRow());
-                HSSFCell myCell = myRow.getCell(e.getCol(),
-                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(myCell);
-            }
-            fis.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void getDataBoth(Workbook workbook, List<RawCellObject> listIn) {
+        for (RawCellObject e : listIn) {
+            Sheet mySheet = workbook.getSheet(e.getSheetName());
+            Row myRow = mySheet.getRow(e.getRow());
+            Cell myCell = myRow.getCell(e.getCol(),
+                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+            setCellStyleAndValue(myCell);
         }
     }
 
@@ -145,6 +101,45 @@ public class ExcelReader {
         this.rowFromFile.addCell(newCell);
 
     }
+
+    /*public void getDataXSSF(List<RawCellObject> listIn) {
+        try {
+            XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
+            for (RawCellObject e : listIn) {
+                XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
+                XSSFRow myRow = mySheet.getRow(e.getRow());
+                XSSFCell myCell = myRow.getCell(e.getCol(),
+                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                setCellStyleAndValue(myCell);
+            }
+            fis.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void getDataHSSF(List<RawCellObject> listIn) {
+        try {
+            HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
+            for (RawCellObject e : listIn) {
+                HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
+                HSSFRow myRow = mySheet.getRow(e.getRow());
+                HSSFCell myCell = myRow.getCell(e.getCol(),
+                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+                setCellStyleAndValue(myCell);
+            }
+            fis.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 }
 
 

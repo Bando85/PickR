@@ -32,18 +32,19 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
 
         final int[] i = {0};
 
+
+
         try {
             Files.walk(model.getSourceDirectoryPath())
-                    .filter((p) -> p.toString().endsWith(".xls") || p.toString().endsWith(".xlsx"))
-                    .forEach(item ->
+                    .filter((path) -> path.toString().endsWith(".xls") || path.toString().endsWith(".xlsx"))
+                    .forEach(path ->
                     {
                         //watch progress
-                        publish(item.toString());
+                        publish(path.toString());
 
-                        ExcelReader r1 = new ExcelReader(item.toString(), model.getExculdeFileNameLike(), model.getIdSheetName(),
-                                model.getIdCellRow(), model.getIdCellColumn(), model.getIdValue());
-                        RowFromFile newRow = r1.getData(model.getListOfCells());
-                        newRow.setFileName(item);
+                        ExcelReader excelReader = new ExcelReader(path, model);
+                        RowFromFile newRow = excelReader.getData(model.getListOfCells());
+                        newRow.setFileName(path);
 
                         //excelwriter
                         ExcelWriter w1 = new ExcelWriter(model.getOutputFilePath().toFile(), "sheet1", i[0]);

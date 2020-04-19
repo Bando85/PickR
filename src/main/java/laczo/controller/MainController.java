@@ -59,13 +59,29 @@ public class MainController {
        if (model.getOutputFilePath()==null) throw new ValidationException("Output directory problem!");
     }
 
+    public void bindViewFieldsToModel() {
+        model.setExculdeFileNameLike(view.getExclusionsTextField().getText());
+        model.setIdSheetName(view.getIdSheetNameTextField().getText());
+        model.setIdCellColumn(view.getIdColTextField().getText());
+        String idRowText =  view.getIdRowTextField().getText();
+        if (idRowText.equals("")) {
+            model.setIdCellRow(null);
+        } else {
+            model.setIdCellRow(Integer.parseInt(idRowText));
+        }
+        model.setIdValue(view.getIdValueTextField().getText());
+    }
+
     public void start() {
         try {
             validateFields();
             validateModel();
+            bindViewFieldsToModel();
 
             PickRFunctions PF1 = new PickRFunctions(model);
             PF1.execute();
+            //JOptionPane.showMessageDialog(null, null);
+
         } catch (ValidationException e) {
             JOptionPane.showMessageDialog(null, e.message);
         }
