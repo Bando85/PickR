@@ -8,13 +8,9 @@ import laczo.services.ExcelOutput;
 import laczo.services.PickRFunctions;
 import laczo.services.importCells;
 import laczo.view.MainView;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 
 /**
@@ -33,17 +29,21 @@ public class MainController {
     }
 
     public void init() {
+        //init source and output path
+        model.setSourceDirectoryPath(new File("C:\\test\\augusztus").toPath());
+        model.setOutputFilePath(new File("C:\\test\\").toPath());
+
         view.getPlayButton().addActionListener(e -> start());
-        view.getChooseSourcePathButton().addActionListener(e -> openFolder());
-        view.getChooseOutputFolderButton().addActionListener(e -> openFolder2());
+        view.getChooseSourcePathButton().addActionListener(e -> chooseSourceFolder());
+        view.getChooseOutputFolderButton().addActionListener(e -> chooseOutputFolder());
         view.getAddCellToListButton().addActionListener(h -> addCellToList());
-        //Import Cell List from TXT file
         view.getImportCellListButton().addActionListener(e -> addImportToJList(importCells.run()));
         view.getCellList().addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 removeCellFromView(e);
             }
         });
+        view.getSourcePathTextField().addFocusListener(new SourceTextField());
     }
 
     public void start() {
@@ -57,14 +57,12 @@ public class MainController {
                 view.getIdRowTextField().getText(), view.getIdColTextField().getText(),
                 view.getIdValueTextField().getText());
         PF1.execute();
-
     }
 
-    public void openFolder() {
+    public void chooseSourceFolder() {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Choose a directory: ");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
         int returnValue = jfc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             if (jfc.getSelectedFile().isDirectory()) {
@@ -75,7 +73,7 @@ public class MainController {
         }
     }
 
-    public void openFolder2() {
+    public void chooseOutputFolder() {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Choose a directory to save your file: ");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -137,6 +135,24 @@ public class MainController {
             menu.show(view.getCellList(), e.getPoint().x, e.getPoint().y);
         }
 
+    }
+
+    private class SourceTextField implements FocusListener {
+        @Override
+        public void focusGained(FocusEvent e) {
+        }
+        @Override
+        public void focusLost(FocusEvent e) {
+            String pathString = view.getSourcePathTextField().getText();
+            File filePath = new File(pathString);
+            if (!filePath.isDirectory()) {
+                JOptionPane.showMessageDialog(null, "Not a valid path!");
+                model.setSourceDirectoryPath(null);
+                view.getSourcePathTextField().grabFocus();
+            } else {
+                model.setSourceDirectoryPath(filePath.toPath());
+            }
+        }
     }
 
 
