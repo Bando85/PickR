@@ -1,6 +1,7 @@
 package laczo.services;
 
 import laczo.model.RawCellObject;
+import laczo.model.RowFromFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -18,7 +19,6 @@ public class ExcelWriter {
     private FileOutputStream fos;
     private XSSFWorkbook myWorkbook;
 
-    //laczo.services.ExcelWriter's constructor
     public ExcelWriter(File f, String s, int r) {
         this.outputFile = f;
         this.sheetname = s;
@@ -34,28 +34,25 @@ public class ExcelWriter {
         }
     }
 
-    public void putData(List<RawCellObject> listOut, String openedFile) {
+    public void putData(RowFromFile newRow) {
 
         try {
-
             XSSFSheet mySheet = myWorkbook.getSheet(sheetname);
             XSSFRow myRow = mySheet.createRow(row);
-
-            for (RawCellObject e : listOut) {
-
+            for (RawCellObject e : newRow.getCells()) {
                 if (e.getValue() != null) {
                     CellType cType = e.getValueType();
                     switch (cType) {
                         case STRING:
-                            myRow.getCell(e.getCol(),
+                            myRow.getCell(newRow.getCells().indexOf(e),
                                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(e.getValue().toString());
                             break;
                         case NUMERIC:
-                            myRow.getCell(e.getCol(),
+                            myRow.getCell(newRow.getCells().indexOf(e),
                                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue((double) (e.getValue()));
                             break;
                         case FORMULA:
-                            myRow.getCell(e.getCol(),
+                            myRow.getCell(newRow.getCells().indexOf(e),
                                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(e.getValue().toString());
                             break;
                     }
@@ -63,7 +60,7 @@ public class ExcelWriter {
             }
 
 
-            myRow.getCell((myRow.getLastCellNum()+2), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(openedFile); //show path of actual file
+            myRow.getCell((myRow.getLastCellNum()+2), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(newRow.getFileName().toString()); //show path of actual file
 
             fos = new FileOutputStream(outputFile);
             myWorkbook.write(fos);

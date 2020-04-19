@@ -1,49 +1,24 @@
 package laczo.services;
 
-import laczo.model.ListOfCells;
-import laczo.model.RawCellObject;
+import laczo.model.Model;
+import laczo.model.RowFromFile;
 import laczo.view.ProgressView;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
 public final class PickRFunctions extends SwingWorker<Integer, String> {
 
-    private ListOfCells cellListData;
-    private String workFolder;
-    private File outputFile;
-    private File openFolder;
+    private Model model;
     private ProgressView form;
     private JFrame frame;
 
-    private String exclusions;
-    private String idSheet;
-    private int idRow;
-    private String idCol;
-    private String idValue;
-
-    public PickRFunctions(String workFolder, File outFile, File openFolder, ListOfCells cellList, String exclusions, String idSheet, String idRowText, String idCol, String idValue) {
-        this.workFolder=workFolder;
-        this.outputFile=outFile;
-        this.openFolder=openFolder;
+    public PickRFunctions(Model model) {
+        this.model = model;
         this.form = new ProgressView();
         this.frame = new JFrame("PickR by András Laczó");
-        this.cellListData = cellList;
-
-        this.exclusions = exclusions;
-        this.idSheet = idSheet;
-
-        try {
-            this.idRow = Integer.parseInt(idRowText);
-        } catch (NumberFormatException n){
-
-        }
-
-        this.idCol = idCol;
-        this.idValue = idValue;
 
         frame.setContentPane(this.form.getPanel2());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -58,29 +33,22 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
         final int[] i = {0};
 
         try {
-            Files.walk(openFolder.toPath())
+            Files.walk(model.getSourceDirectoryPath())
                     .filter((p) -> p.toString().endsWith(".xls") || p.toString().endsWith(".xlsx"))
                     .forEach(item ->
                     {
                         //watch progress
-                       publish(item.toString());
+                        publish(item.toString());
 
-                        ExcelReader r1 = new ExcelReader(item.toString(), exclusions, idSheet, idRow, idCol, idValue) ;
-                        ListOfCells lOC = cellListData.makeCopy();
-                        List<RawCellObject> inList = r1.getData(lOC);
+                        ExcelReader r1 = new ExcelReader(item.toString(), model.getExculdeFileNameLike(), model.getIdSheetName(),
+                                model.getIdCellRow(), model.getIdCellColumn(), model.getIdValue());
+                        RowFromFile newRow = r1.getData(model.getListOfCells());
+                        newRow.setFileName(item);
 
-                        if (inList != null) {
-
-                            int colCounter = 0;
-                            for (RawCellObject eIn : inList) {
-                                eIn.setCol(colCounter);
-                                colCounter++;
-                            }
-                            //excelwriter
-                            ExcelWriter w1 = new ExcelWriter(outputFile, "sheet1", i[0]);
-                            w1.putData(inList, item.toString());
-                            i[0]++;
-                        }
+                        //excelwriter
+                        ExcelWriter w1 = new ExcelWriter(model.getOutputFilePath().toFile(), "sheet1", i[0]);
+                        w1.putData(newRow);
+                        i[0]++;
                     });
 
         } catch (IOException ex) {
@@ -94,7 +62,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     @Override
     protected void process(final List<String> chunks) {
         // Updates
-        form.setFileLabel(chunks.get(chunks.size()-1));
+        form.setFileLabel(chunks.get(chunks.size() - 1));
         frame.repaint();
 
     }

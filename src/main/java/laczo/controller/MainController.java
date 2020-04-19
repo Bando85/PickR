@@ -2,12 +2,12 @@ package laczo.controller;
 
 import laczo.model.ListOfCells;
 import laczo.model.RawCellObject;
-import laczo.model.ViewModel;
+import laczo.model.Model;
 import laczo.services.ExcelColumn;
-import laczo.services.ExcelOutput;
 import laczo.services.PickRFunctions;
 import laczo.services.importCells;
 import laczo.view.MainView;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.*;
@@ -19,11 +19,10 @@ import java.io.File;
 
 public class MainController {
 
-    private ViewModel model;
+    private Model model;
     private MainView view;
-    private ListOfCells cellListData = new ListOfCells();
 
-    public MainController(ViewModel model, MainView view) {
+    public MainController(Model model, MainView view) {
         this.model = model;
         this.view = view;
     }
@@ -46,17 +45,30 @@ public class MainController {
         view.getSourcePathTextField().addFocusListener(new SourceTextField());
     }
 
-    public void start() {
-        File inputFolder = model.getSourceDirectoryPath().toFile();
-        File outputFolder = model.getOutputFilePath().toFile();
+    public void validateFields() throws ValidationException {
+        String idRowText =  view.getIdRowTextField().getText();
+        try {
+            if (!idRowText.equals("")) {Integer.parseInt(idRowText);}
+        } catch (NumberFormatException n) {
+            throw new ValidationException("IdRow Field Problem!");
+        }
+    }
 
-        ExcelOutput ExOut = new ExcelOutput();
-        File outFile = ExOut.createFile(outputFolder);
-        PickRFunctions PF1 = new PickRFunctions(model.getSourceDirectoryPath().toString(), outFile, inputFolder,
-                cellListData, view.getExclusionsTextField().getText(), view.getIdSheetNameTextField().getText(),
-                view.getIdRowTextField().getText(), view.getIdColTextField().getText(),
-                view.getIdValueTextField().getText());
-        PF1.execute();
+    public void validateModel() throws ValidationException{
+       if (model.getSourceDirectoryPath()==null) throw new ValidationException("Source directory problem!");
+       if (model.getOutputFilePath()==null) throw new ValidationException("Output directory problem!");
+    }
+
+    public void start() {
+        try {
+            validateFields();
+            validateModel();
+
+            PickRFunctions PF1 = new PickRFunctions(model);
+            PF1.execute();
+        } catch (ValidationException e) {
+            JOptionPane.showMessageDialog(null, e.message);
+        }
     }
 
     public void chooseSourceFolder() {
@@ -96,27 +108,27 @@ public class MainController {
         int rowN;
         try {
             rowN = Integer.parseInt(rowS);
-            cellListData.addCell(rowN, colS, sheet);
-            model.getCellListModel().addElement(colS + rowS + " in sheet " + sheet);
+            model.getListOfCells().addCell(rowN, colS, sheet);
+            model.getCellListViewModel().addElement(colS + rowS + " in sheet " + sheet);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Only numbers for row!");
         }
-        view.getCellList().setModel(model.getCellListModel());
+        view.getCellList().setModel(model.getCellListViewModel());
     }
 
     private void addImportToJList(ListOfCells listOC) {
         for (RawCellObject cell : listOC) {
-            cellListData.add(cell);
+            model.getListOfCells().add(cell);
             String col = ExcelColumn.toName(cell.getCol());
             String row = Integer.toString(cell.getRow() + 1);
             String sheet = cell.getSheetName();
-            model.getCellListModel().addElement(col + row + " in sheet " + sheet);
+            model.getCellListViewModel().addElement(col + row + " in sheet " + sheet);
         }
     }
 
     private void removeCellFromList(Integer cellPos) {
-        cellListData.remove(cellPos);
-        model.getCellListModel().removeElementAt(cellPos);
+        model.getListOfCells().remove(cellPos);
+        model.getCellListViewModel().removeElementAt(cellPos);
     }
 
     private void removeCellFromView(MouseEvent e) {
@@ -141,6 +153,7 @@ public class MainController {
         @Override
         public void focusGained(FocusEvent e) {
         }
+
         @Override
         public void focusLost(FocusEvent e) {
             String pathString = view.getSourcePathTextField().getText();
@@ -155,5 +168,18 @@ public class MainController {
         }
     }
 
+    private class ValidationException extends Exception {
 
+        private String message;
+
+        private ValidationException(String message) {
+            this.message = message;
+        }
+
+        @Override
+        public String getMessage() {
+            return message;
+        }
+
+    }
 }

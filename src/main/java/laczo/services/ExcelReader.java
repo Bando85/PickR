@@ -1,6 +1,7 @@
 package laczo.services;
 
 import laczo.model.RawCellObject;
+import laczo.model.RowFromFile;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -8,6 +9,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -28,8 +30,11 @@ public class ExcelReader {
     private int idRow;
     private String idCol;
     private String idValue;
+    private RowFromFile rowFromFile;
 
     private List<String> sheetList = Arrays.asList("", ""); // sheetList for identification
+
+    //maybe the problem is with identification
 
     public ExcelReader(String p, String exclusions, String idSheet, int idRow, String idCol, String idValue) {
         this.path = p;
@@ -39,9 +44,10 @@ public class ExcelReader {
         this.idCol = idCol;
         this.idValue = idValue;
         this.sheetList = sheetList;
+        this.rowFromFile = new RowFromFile();
     }
 
-    public List<RawCellObject> getData(List<RawCellObject> listIn) {
+    public RowFromFile getData(List<RawCellObject> listIn) {
         ExcelIdentifier exid = new ExcelIdentifier(path, exclusions, idSheet, idRow, idCol, idValue);//identify excel files
         if (exid.run()) {
             try {
@@ -50,13 +56,14 @@ public class ExcelReader {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "File Not Found in laczo.services.ExcelReader");
             }
-            if (path.endsWith(".xlsx")) return getDataXSSF(listIn);
-            if (path.endsWith(".xls")) return getDataHSSF(listIn);
+            if (path.endsWith(".xlsx")) {getDataXSSF(listIn);}
+            if (path.endsWith(".xls")) {getDataHSSF(listIn);}
         }
-        return null;
+        return this.rowFromFile;
     }
 
-    public List<RawCellObject> getDataXSSF(List<RawCellObject> listIn) {
+
+    public void getDataXSSF(List<RawCellObject> listIn) {
         try {
             XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
             for (RawCellObject e : listIn) {
@@ -64,21 +71,19 @@ public class ExcelReader {
                 XSSFRow myRow = mySheet.getRow(e.getRow());
                 XSSFCell myCell = myRow.getCell(e.getCol(),
                         Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(e, myCell);
+                setCellStyleAndValue(myCell);
             }
             fis.close();
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return listIn;
     }
 
 
-
-    public List<RawCellObject> getDataHSSF(List<RawCellObject> listIn) {
+    public void getDataHSSF(List<RawCellObject> listIn) {
         try {
             HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
             for (RawCellObject e : listIn) {
@@ -86,56 +91,59 @@ public class ExcelReader {
                 HSSFRow myRow = mySheet.getRow(e.getRow());
                 HSSFCell myCell = myRow.getCell(e.getCol(),
                         Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(e, myCell);
-
+                setCellStyleAndValue(myCell);
             }
             fis.close();
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-             return listIn;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //generic method to use both XSSF and HSSF cell
-    public <C extends Cell> void setCellStyleAndValue(RawCellObject eDataOutput, C inputCell) {
+    public <C extends Cell> void setCellStyleAndValue(C inputCell) {
+        RawCellObject newCell = new RawCellObject();
+
         if (inputCell.getCellType() == CellType.STRING) {
-            eDataOutput.setValue(inputCell.getRichStringCellValue());
-            eDataOutput.setValueType(CellType.STRING);
+            newCell.setValue(inputCell.getRichStringCellValue());
+            newCell.setValueType(CellType.STRING);
         }
         if (inputCell.getCellType() == CellType.NUMERIC) {
-            eDataOutput.setValue(inputCell.getNumericCellValue());
-            eDataOutput.setValueType(CellType.NUMERIC);
+            newCell.setValue(inputCell.getNumericCellValue());
+            newCell.setValueType(CellType.NUMERIC);
         }
         if (inputCell.getCellType() == CellType.BOOLEAN) {
-            eDataOutput.setValue(inputCell.getBooleanCellValue());
-            eDataOutput.setValueType(CellType.BOOLEAN);
+            newCell.setValue(inputCell.getBooleanCellValue());
+            newCell.setValueType(CellType.BOOLEAN);
         }
         if (inputCell.getCellType() == CellType.ERROR) {
-            eDataOutput.setValue(inputCell.getErrorCellValue());
-            eDataOutput.setValueType(CellType.ERROR);
+            newCell.setValue(inputCell.getErrorCellValue());
+            newCell.setValueType(CellType.ERROR);
         }
         if (inputCell.getCellType() == CellType.FORMULA) {
 
             if (inputCell.getCachedFormulaResultType() == CellType.NUMERIC) {
-                eDataOutput.setValue(inputCell.getNumericCellValue());
-                eDataOutput.setValueType(CellType.NUMERIC);
+                newCell.setValue(inputCell.getNumericCellValue());
+                newCell.setValueType(CellType.NUMERIC);
             }
             if (inputCell.getCachedFormulaResultType() == CellType.STRING) {
-                eDataOutput.setValue(inputCell.getStringCellValue());
-                eDataOutput.setValueType(CellType.STRING);
+                newCell.setValue(inputCell.getStringCellValue());
+                newCell.setValueType(CellType.STRING);
             }
             if (inputCell.getCellType() == CellType.BOOLEAN) {
-                eDataOutput.setValue(inputCell.getBooleanCellValue());
-                eDataOutput.setValueType(CellType.BOOLEAN);
+                newCell.setValue(inputCell.getBooleanCellValue());
+                newCell.setValueType(CellType.BOOLEAN);
             }
             if (inputCell.getCellType() == CellType.ERROR) {
-                eDataOutput.setValue(inputCell.getErrorCellValue());
-                eDataOutput.setValueType(CellType.ERROR);
+                newCell.setValue(inputCell.getErrorCellValue());
+                newCell.setValueType(CellType.ERROR);
             }
         }
+
+        this.rowFromFile.addCell(newCell);
+
     }
 }
 

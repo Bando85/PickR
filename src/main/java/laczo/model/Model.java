@@ -7,15 +7,17 @@ import java.nio.file.Path;
  * Created by Andras Laczo 2020. 04. 17.
  */
 
-public class ViewModel {
+public class Model {
 
     private Path sourceDirectoryPath;
     private Path outputFilePath;
     private String idSheetName;
     private String idCellColumn;
-    private String idCellRow;
+    private int idCellRow;
+    private String idValue;
     private String exculdeFileNameLike;
-    private DefaultListModel<String> cellListModel = new DefaultListModel<>();
+    private DefaultListModel<String> cellListViewModel = new DefaultListModel<>();
+    private ListOfCells listOfCells = new ListOfCells();
 
     public Path getSourceDirectoryPath() {
         return sourceDirectoryPath;
@@ -49,11 +51,11 @@ public class ViewModel {
         this.idCellColumn = idCellColumn;
     }
 
-    public String getIdCellRow() {
+    public Integer getIdCellRow() {
         return idCellRow;
     }
 
-    public void setIdCellRow(String idCellRow) {
+    public void setIdCellRow(Integer idCellRow) {
         this.idCellRow = idCellRow;
     }
 
@@ -65,11 +67,27 @@ public class ViewModel {
         this.exculdeFileNameLike = exculdeFileNameLike;
     }
 
-    public DefaultListModel<String> getCellListModel() {
-        return cellListModel;
+    public DefaultListModel<String> getCellListViewModel() {
+        return cellListViewModel;
     }
 
-    public void setCellListModel(DefaultListModel<String> cellListModel) {
-        this.cellListModel = cellListModel;
+    public void setCellListViewModel(DefaultListModel<String> cellListViewModel) {
+        this.cellListViewModel = cellListViewModel;
+    }
+
+    public String getIdValue() {
+        return idValue;
+    }
+
+    public void setIdValue(String idValue) {
+        this.idValue = idValue;
+    }
+
+    public ListOfCells getListOfCells() {
+        return listOfCells;
+    }
+
+    public void setListOfCells(ListOfCells listOfCells) {
+        this.listOfCells = listOfCells;
     }
 }
