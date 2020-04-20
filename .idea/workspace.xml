@@ -7,13 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3eec5767-ba31-4c9e-b334-10b8bf7bb5b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/laczo/exceptions/MissingSheetException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,11 +24,11 @@
     <session id="-907594377">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="61" />
+          <entry key="project.closed" value="62" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="11" />
           <entry key="project.open.time.10" value="6" />
-          <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.14" value="4" />
           <entry key="project.open.time.2" value="1" />
@@ -40,48 +37,49 @@
           <entry key="project.open.time.7" value="16" />
           <entry key="project.open.time.8" value="10" />
           <entry key="project.open.time.9" value="4" />
-          <entry key="project.opened" value="62" />
+          <entry key="project.opened" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="MF" value="7" />
-          <entry key="class" value="20" />
+          <entry key="class" value="21" />
           <entry key="form" value="26" />
           <entry key="iml" value="4" />
-          <entry key="java" value="187" />
-          <entry key="xml" value="9" />
+          <entry key="java" value="193" />
+          <entry key="xml" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="20" />
+          <entry key="CLASS" value="21" />
           <entry key="GUI_DESIGNER_FORM" value="26" />
           <entry key="IDEA_MODULE" value="4" />
-          <entry key="JAVA" value="187" />
+          <entry key="JAVA" value="193" />
           <entry key="Manifest" value="7" />
-          <entry key="XML" value="9" />
+          <entry key="XML" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="MF" value="17" />
           <entry key="dummy" value="14" />
-          <entry key="java" value="18785" />
-          <entry key="txt" value="778" />
+          <entry key="java" value="19108" />
+          <entry key="txt" value="811" />
           <entry key="xml" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="18785" />
+          <entry key="JAVA" value="19108" />
           <entry key="Manifest" value="17" />
-          <entry key="PLAIN_TEXT" value="792" />
+          <entry key="PLAIN_TEXT" value="825" />
           <entry key="XML" value="86" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
+          <entry key="git.branch.checkout.local" value="1" />
           <entry key="git.branch.create.new" value="1" />
           <entry key="git.branch.merge" value="1" />
         </counts>
@@ -96,7 +94,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
+            <state relative-caret-position="431">
               <caret line="82" column="14" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -105,23 +103,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="298">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/RawCellObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/exceptions/MissingSheetException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -129,53 +136,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
+            <state relative-caret-position="519">
               <caret line="86" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1385#1386#0" expanded="true" />
-                <element signature="e#1427#1428#0" expanded="true" />
-                <element signature="e#2116#2117#0" expanded="true" />
+                <element signature="e#2120#2121#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/view/MainView.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="316" column="5" lean-forward="true" selection-start-line="316" selection-start-column="5" selection-end-line="316" selection-end-column="5" />
+            <state relative-caret-position="291">
+              <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelOutput.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelPosition.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelColumn.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -183,14 +161,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
+            <state relative-caret-position="765">
               <caret line="60" selection-start-line="60" selection-end-line="60" />
-              <folding>
-                <element signature="e#3660#3661#0" expanded="true" />
-                <element signature="e#3686#3687#0" expanded="true" />
-                <element signature="e#3740#3741#0" expanded="true" />
-                <element signature="e#3781#3782#0" expanded="true" />
-              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi-ooxml/4.0.0/poi-ooxml-4.0.0.jar!/org/apache/poi/xssf/usermodel/XSSFWorkbook.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
             </state>
           </provider>
         </entry>
@@ -198,8 +179,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="357">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/LicenseValidator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -209,8 +199,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -273,13 +263,14 @@
         <option value="$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/model/ViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/view/MainView.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/services/ExcelOutput.java" />
         <option value="$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/laczo/exceptions/MissingSheetException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java" />
       </list>
     </option>
   </component>
@@ -290,9 +281,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -302,6 +294,55 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="PickR" type="58d84e3e:PackageViewProjectNode" />
+              <item name="PickR" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -359,92 +400,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controller" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="view" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="PickR" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="PickR" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="laczo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="view" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="MainView" type="e9f4de52:FormNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PickR" type="58d84e3e:PackageViewProjectNode" />
-              <item name="PickR" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -458,7 +413,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE" value="right" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="317" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587320511211" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587405837320" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -471,16 +426,16 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="laczo" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\java\laczo\view" />
-      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\Old Classes" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\resources\META-INF" />
+      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\resources\META-INF" />
-      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\resources" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\java\laczo\view" />
+      <recent name="C:\Users\laczo\IdeaProjects\PickR\src\main\Old Classes" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -633,7 +588,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587306957025</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="bug still exists!">
+      <created>1587320570441</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1587320570441</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -670,9 +632,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5055679" visible="true" weight="0.1552" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5055679" visible="true" weight="0.22453333" />
       <window_info id="Structure" order="1" sideWeight="0.49443206" side_tool="true" weight="0.26072875" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -682,9 +643,9 @@
       <window_info id="Favorites" order="7" sideWeight="0.33985764" side_tool="true" weight="0.24615385" />
       <window_info x="343" y="51" width="198" height="586" id="Palette" order="8" weight="0.32955465" />
       <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49959514" weight="0.3291815" />
-      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.3408" side_tool="true" visible="true" weight="0.30260304" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6592" visible="true" weight="0.30260304" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.824" weight="0.34815618" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.3424" side_tool="true" visible="true" weight="0.30260304" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6576" visible="true" weight="0.30260304" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8229333" weight="0.34815618" />
       <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.4928" weight="0.48590022" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49959514" weight="0.3291815" />
@@ -743,19 +704,8 @@
     <MESSAGE value="refactoring to MVC" />
     <MESSAGE value="change Intellij Settings Editor GUI Designer to add GUI code to source code, assuming it will resolve &quot;awt-eventqueue-0&quot; exception" />
     <MESSAGE value="updated exception handling, probably bug with identification" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated exception handling, probably bug with identification" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java</url>
-          <line>60</line>
-          <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="bug still exists!" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug still exists!" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -825,27 +775,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/Old Classes/IntrumData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Old Classes/IntrumOutData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="46" lean-forward="true" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/4.0.0/poi-4.0.0.jar!/org/apache/poi/poifs/filesystem/BlockStore.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi/4.0.0/poi-4.0.0.jar!/org/apache/poi/util/LongField.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -994,20 +923,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/LicenseValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/laczo/PickRApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="21" column="71" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="21" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1015,18 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#179#180#0" expanded="true" />
-            <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#252#253#0" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#356#357#0" expanded="true" />
-            <element signature="e#406#407#0" expanded="true" />
-            <element signature="e#455#456#0" expanded="true" />
-            <element signature="initializer##0;class#ProgressView#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1055,23 +962,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/RawCellObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1106,36 +996,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/laczo/view/MainView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="316" column="5" lean-forward="true" selection-start-line="316" selection-start-column="5" selection-end-line="316" selection-end-column="5" />
+        <state relative-caret-position="3434">
+          <caret line="316" column="5" selection-start-line="316" selection-start-column="5" selection-end-line="316" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelOutput.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="82" column="14" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1385#1386#0" expanded="true" />
-            <element signature="e#1427#1428#0" expanded="true" />
-            <element signature="e#2116#2117#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="18" column="68" selection-start-line="18" selection-start-column="68" selection-end-line="18" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -1146,47 +1027,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="e#3660#3661#0" expanded="true" />
-            <element signature="e#3686#3687#0" expanded="true" />
-            <element signature="e#3740#3741#0" expanded="true" />
-            <element signature="e#3781#3782#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="291">
+          <caret line="29" column="80" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="431">
+          <caret line="82" column="14" selection-start-line="82" selection-start-column="14" selection-end-line="82" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/LicenseValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2120#2121#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/poi/poi-ooxml/4.0.0/poi-ooxml-4.0.0.jar!/org/apache/poi/xssf/usermodel/XSSFWorkbook.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/model/RawCellObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/exceptions/MissingSheetException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="357">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelOutput.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/laczo/services/ExcelReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="19" column="42" lean-forward="true" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+        <state relative-caret-position="298">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

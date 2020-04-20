@@ -5,6 +5,7 @@ import laczo.model.RowFromFile;
 import laczo.view.ProgressView;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
@@ -30,9 +31,10 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
     @Override
     protected Integer doInBackground() {
 
+        ExcelOutput excelOutput = new ExcelOutput();
+        File outputFile = excelOutput.createFile(model.getOutputFilePath().toFile());
+
         final int[] i = {0};
-
-
 
         try {
             Files.walk(model.getSourceDirectoryPath())
@@ -43,15 +45,15 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                         publish(path.toString());
 
                         ExcelReader excelReader = new ExcelReader(path, model);
+                        System.out.println("doInbackground try invoked");
                         RowFromFile newRow = excelReader.getData(model.getListOfCells());
                         newRow.setFileName(path);
 
                         //excelwriter
-                        ExcelWriter w1 = new ExcelWriter(model.getOutputFilePath().toFile(), "sheet1", i[0]);
+                        ExcelWriter w1 = new ExcelWriter(outputFile, "sheet1", i[0]);
                         w1.putData(newRow);
                         i[0]++;
                     });
-
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in FilesWalk");

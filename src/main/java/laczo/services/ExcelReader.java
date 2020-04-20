@@ -1,5 +1,6 @@
 package laczo.services;
 
+import laczo.exceptions.MissingSheetException;
 import laczo.model.Model;
 import laczo.model.RawCellObject;
 import laczo.model.RowFromFile;
@@ -42,15 +43,21 @@ public class ExcelReader {
                 }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "File Not Found in ExcelReader");
+            } catch (MissingSheetException e) {
+                RawCellObject cell = new RawCellObject();
+                cell.setValueType(CellType.STRING);
+                cell.setValue("MissingSheet");
+                this.rowFromFile.addCell(cell);
             }
         }
         return this.rowFromFile;
     }
 
 
-    public void getDataBoth(Workbook workbook, List<RawCellObject> listIn) {
+    public void getDataBoth(Workbook workbook, List<RawCellObject> listIn) throws MissingSheetException {
         for (RawCellObject e : listIn) {
             Sheet mySheet = workbook.getSheet(e.getSheetName());
+            if (mySheet==null) throw new MissingSheetException();
             Row myRow = mySheet.getRow(e.getRow());
             Cell myCell = myRow.getCell(e.getCol(),
                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
@@ -101,45 +108,6 @@ public class ExcelReader {
         this.rowFromFile.addCell(newCell);
 
     }
-
-    /*public void getDataXSSF(List<RawCellObject> listIn) {
-        try {
-            XSSFWorkbook myWorkbook = new XSSFWorkbook(fis);
-            for (RawCellObject e : listIn) {
-                XSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
-                XSSFRow myRow = mySheet.getRow(e.getRow());
-                XSSFCell myCell = myRow.getCell(e.getCol(),
-                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(myCell);
-            }
-            fis.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in getDataXSSF");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void getDataHSSF(List<RawCellObject> listIn) {
-        try {
-            HSSFWorkbook myWorkbook = new HSSFWorkbook(fis);
-            for (RawCellObject e : listIn) {
-                HSSFSheet mySheet = myWorkbook.getSheet(e.getSheetName());
-                HSSFRow myRow = mySheet.getRow(e.getRow());
-                HSSFCell myCell = myRow.getCell(e.getCol(),
-                        Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-                setCellStyleAndValue(myCell);
-            }
-            fis.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            JOptionPane.showMessageDialog(null, "IOException in getDataHSSF");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
 }
 
 
