@@ -140,6 +140,7 @@ public class MainController {
             String sheet = cell.getSheetName();
             model.getCellListViewModel().addElement(col + row + " in sheet " + sheet);
         }
+        view.getCellList().setModel(model.getCellListViewModel());
     }
 
     private void removeCellFromList(Integer cellPos) {
