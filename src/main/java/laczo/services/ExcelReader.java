@@ -1,18 +1,21 @@
 package laczo.services;
 
-import laczo.exceptions.MissingSheetException;
+import laczo.exceptions.MissingWorkbookElementException;
 import laczo.model.Model;
 import laczo.model.RawCellObject;
 import laczo.model.RowFromFile;
 
+import org.apache.poi.hpsf.MissingSectionException;
 import org.apache.poi.ss.usermodel.*;
 
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class ExcelReader {
     private Path path;
@@ -32,36 +35,41 @@ public class ExcelReader {
 
     public RowFromFile getData(List<RawCellObject> listIn) {
         ExcelIdentifier excelIdentifier = new ExcelIdentifier(path.toString(), model.getExculdeFileNameLike(), model.getIdSheetName(),
-                model.getIdCellRow(), model.getIdCellColumn(), model.getIdValue()) ;//identify excel files
+                model.getIdCellRow(), model.getIdCellColumn(), model.getIdValue());//identify excel files
         if (excelIdentifier.filterByFileName()) {
             try {
                 fis = new FileInputStream(path.toFile());
                 ExcelIdentifier.setFis(fis);
                 Workbook workbook = excelIdentifier.run();
-                if (workbook!=null){
-                   getDataBoth(workbook, listIn);
+                if (workbook != null) {
+                    getDataBoth(workbook, listIn);
                 }
+                fis.close();
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "File Not Found in ExcelReader");
-            } catch (MissingSheetException e) {
-                RawCellObject cell = new RawCellObject();
-                cell.setValueType(CellType.STRING);
-                cell.setValue("MissingSheet");
-                this.rowFromFile.addCell(cell);
+            } catch (IOException f) {
+                JOptionPane.showMessageDialog(null, "IOException in ExcelReader");
             }
         }
         return this.rowFromFile;
     }
 
-
-    public void getDataBoth(Workbook workbook, List<RawCellObject> listIn) throws MissingSheetException {
+    public void getDataBoth(Workbook workbook, List<RawCellObject> listIn) {
         for (RawCellObject e : listIn) {
-            Sheet mySheet = workbook.getSheet(e.getSheetName());
-            if (mySheet==null) throw new MissingSheetException();
-            Row myRow = mySheet.getRow(e.getRow());
-            Cell myCell = myRow.getCell(e.getCol(),
-                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-            setCellStyleAndValue(myCell);
+            try {
+                Sheet mySheet = Optional.ofNullable(workbook.getSheet(e.getSheetName())).
+                        orElseThrow(() -> new MissingWorkbookElementException("MissingSheet"));
+                Row myRow = Optional.ofNullable(mySheet.getRow(e.getRow())).
+                        orElseThrow(() -> new MissingWorkbookElementException("MissingRow"));
+                Cell myCell = Optional.ofNullable(myRow.getCell(e.getCol())).
+                        orElseThrow(() -> new MissingWorkbookElementException("MissingCell"));
+                setCellStyleAndValue(myCell);
+            } catch (MissingWorkbookElementException m) {
+                RawCellObject cell = new RawCellObject();
+                cell.setValueType(CellType.STRING);
+                cell.setValue(m.getMessage());
+                this.rowFromFile.addCell(cell);
+            }
         }
     }
 
@@ -69,6 +77,10 @@ public class ExcelReader {
     public <C extends Cell> void setCellStyleAndValue(C inputCell) {
         RawCellObject newCell = new RawCellObject();
 
+        if (inputCell.getCellType() == CellType.BLANK) {
+            newCell.setValue("BLANK");
+            newCell.setValueType(CellType.STRING);
+        }
         if (inputCell.getCellType() == CellType.STRING) {
             newCell.setValue(inputCell.getRichStringCellValue());
             newCell.setValueType(CellType.STRING);

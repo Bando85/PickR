@@ -52,22 +52,22 @@ public class ExcelIdentifier {
 
     public Workbook run() {
 
-        Workbook workbook = null;
+        Workbook workbook;
 
-        //see if contains the sheetList
         try {
             if (path.endsWith(".xlsx")) {
                 workbook = new XSSFWorkbook(fis);
-                if (isValid(workbook)) return workbook;
+                return (isValid(workbook)) ? workbook : null;
             }
             if (path.endsWith(".xls")) {
                 workbook = new HSSFWorkbook(fis);
-                if (isValid(workbook)) return workbook;
+                return (isValid(workbook)) ? workbook : null;
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Input/Output file exception");
+            JOptionPane.showMessageDialog(null, "Unable to open file (Excel Identifier)");
+
         }
-        return workbook;
+        return null;
     }
 
     private Boolean isValid(Workbook workbook) {
@@ -77,15 +77,16 @@ public class ExcelIdentifier {
 
         if (workbook.getSheet(this.idSheet) == null) return false;
 
-        Sheet mySheet = workbook.getSheet(this.idSheet);
-        Row myRow = mySheet.getRow(this.idRow - 1);
-        Cell myCell = myRow.getCell(ExcelColumn.toNumber(this.idCol) - 1,
-                Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-
-        if (myCell.getStringCellValue().equals(idValue)) return true;
-
+        try {
+            Sheet mySheet = workbook.getSheet(this.idSheet);
+            Row myRow = mySheet.getRow(this.idRow - 1);
+            Cell myCell = myRow.getCell(ExcelColumn.toNumber(this.idCol) - 1,
+                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
+            if (myCell.getStringCellValue().equals(idValue)) return true;
+        } catch (Exception e) {
+            return false;
+        }
         return false;
-
     }
 
     public static FileInputStream getFis() {

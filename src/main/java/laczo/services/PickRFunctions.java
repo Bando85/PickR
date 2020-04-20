@@ -45,7 +45,6 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                         publish(path.toString());
 
                         ExcelReader excelReader = new ExcelReader(path, model);
-                        System.out.println("doInbackground try invoked");
                         RowFromFile newRow = excelReader.getData(model.getListOfCells());
                         newRow.setFileName(path);
 

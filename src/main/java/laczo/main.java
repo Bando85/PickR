@@ -23,17 +23,7 @@ class PickRApplication {
                     MainView view = new MainView();
                     Model model = new Model();
 
-                    //for testing
-                    model.setOutputFilePath(Paths.get("C:\\test"));
-                    model.setSourceDirectoryPath(Paths.get("C:\\test\\augusztus"));
-
                     MainController controller = new MainController(model, view);
-
-                    //for testing
-                    ListOfCells listOfCells = new ListOfCells();
-                    listOfCells.addCell(8, "K", "ADATLAP");
-                    listOfCells.addCell(25, "G", "ADATLAP");
-                    model.setListOfCells(listOfCells);
 
                     view.init();
                     controller.init();
