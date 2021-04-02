@@ -53,7 +53,7 @@ public final class PickRFunctions extends SwingWorker<Integer, String> {
                         w1.putData(newRow);
                         i[0]++;
                     });
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "IOException in FilesWalk");
         }

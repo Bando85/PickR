@@ -65,7 +65,8 @@ public class ExcelIdentifier {
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Unable to open file (Excel Identifier)");
-
+        } catch (Exception f) {
+            JOptionPane.showMessageDialog(null, "Unable to load file (Excel Identifier)");
         }
         return null;
     }
@@ -75,7 +76,9 @@ public class ExcelIdentifier {
         //if user don't want identification then leaves the fields blank
         if (this.idSheet.equals("")) return true;
 
+        //if user just sheet identification want then leaves the other fields blank
         if (workbook.getSheet(this.idSheet) == null) return false;
+        if (this.idCol.equals("")) return true;
 
         try {
             Sheet mySheet = workbook.getSheet(this.idSheet);

@@ -28,9 +28,9 @@ public class MainController {
     }
 
     public void init() {
-        //init source and output path
-        model.setSourceDirectoryPath(new File("C:\\test\\augusztus").toPath());
-        model.setOutputFilePath(new File("C:\\test\\").toPath());
+        //init source and output path (not used, cause problem with Unix)
+        model.setSourceDirectoryPath(new File("").toPath());
+        model.setOutputFilePath(new File("").toPath());
 
         view.getPlayButton().addActionListener(e -> start());
         view.getChooseSourcePathButton().addActionListener(e -> chooseSourceFolder());
@@ -42,7 +42,7 @@ public class MainController {
                 removeCellFromView(e);
             }
         });
-        view.getSourcePathTextField().addFocusListener(new SourceTextField());
+        //view.getSourcePathTextField().addFocusListener(new SourceTextField());
     }
 
     public void validateFields() throws ValidationException {
@@ -166,24 +166,24 @@ public class MainController {
 
     }
 
-    private class SourceTextField implements FocusListener {
-        @Override
-        public void focusGained(FocusEvent e) {
-        }
+   // private class SourceTextField implements FocusListener {
+     //   @Override
+       // public void focusGained(FocusEvent e) {
+        //}
 
-        @Override
-        public void focusLost(FocusEvent e) {
-            String pathString = view.getSourcePathTextField().getText();
-            File filePath = new File(pathString);
-            if (!filePath.isDirectory()) {
-                JOptionPane.showMessageDialog(null, "Not a valid path!");
-                model.setSourceDirectoryPath(null);
-                view.getSourcePathTextField().grabFocus();
-            } else {
-                model.setSourceDirectoryPath(filePath.toPath());
-            }
-        }
-    }
+     //   @Override
+       // public void focusLost(FocusEvent e) {
+         //   String pathString = view.getSourcePathTextField().getText();
+           // File filePath = new File(pathString);
+           // if (!filePath.isDirectory()) {
+             //   JOptionPane.showMessageDialog(null, "Not a valid path!");
+             //   model.setSourceDirectoryPath(null);
+              //  view.getSourcePathTextField().grabFocus();
+         //   } else {
+           //     model.setSourceDirectoryPath(filePath.toPath());
+         //   }
+      //  }
+  //  }
 
     private class ValidationException extends Exception {
 

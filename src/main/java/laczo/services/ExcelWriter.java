@@ -36,31 +36,32 @@ public class ExcelWriter {
 
     public void putData(RowFromFile newRow) {
 
+        Integer starterColPos = 2;
+
         try {
             XSSFSheet mySheet = myWorkbook.getSheet(sheetname);
             XSSFRow myRow = mySheet.createRow(row);
+
+            myRow.getCell(0, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(newRow.getFileName().toString()); //show path of actual file
+
             for (RawCellObject e : newRow.getCells()) {
                 if (e.getValue() != null) {
                     CellType cType = e.getValueType();
                     switch (cType) {
                         case STRING:
-                            myRow.getCell(newRow.getCells().indexOf(e),
+                        case FORMULA:
+                            myRow.getCell(starterColPos + newRow.getCells().indexOf(e),
                                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(e.getValue().toString());
                             break;
                         case NUMERIC:
-                            myRow.getCell(newRow.getCells().indexOf(e),
+                            myRow.getCell(starterColPos + newRow.getCells().indexOf(e),
                                     Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue((double) (e.getValue()));
-                            break;
-                        case FORMULA:
-                            myRow.getCell(newRow.getCells().indexOf(e),
-                                    Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(e.getValue().toString());
                             break;
                     }
                 }
             }
 
 
-            myRow.getCell((myRow.getLastCellNum()+2), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK).setCellValue(newRow.getFileName().toString()); //show path of actual file
 
             fos = new FileOutputStream(outputFile);
             myWorkbook.write(fos);
