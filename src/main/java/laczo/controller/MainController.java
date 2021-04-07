@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.*;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Andras Laczo 2020. 04. 17.
@@ -36,14 +37,22 @@ public class MainController {
         view.getChooseSourcePathButton().addActionListener(e -> chooseSourceFolder());
         view.getChooseOutputFolderButton().addActionListener(e -> chooseOutputFolder());
         view.getAddCellToListButton().addActionListener(h -> addCellToList());
-        view.getImportCellListButton().addActionListener(e -> addImportToJList(importCells.run()));
+        view.getImportCellListButton().addActionListener(e -> addImportToJList(importCells.run(model.getCharset())));
         view.getCellList().addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 removeCellFromView(e);
             }
         });
-        //view.getSourcePathTextField().addFocusListener(new SourceTextField());
+
+        view.getImportCellCharsetComboBox().addActionListener(f ->setImportCellsCharset());
     }
+
+    private void setImportCellsCharset() {
+        String comboText = view.getImportCellCharsetComboBox().getSelectedItem().toString();
+        if (comboText.equals("UTF_8")) model.setCharset(StandardCharsets.UTF_8);
+        if (comboText.equals("ISO_8859_1")) model.setCharset(StandardCharsets.ISO_8859_1);
+    }
+
 
     public void validateFields() throws ValidationException {
         String idRowText =  view.getIdRowTextField().getText();
@@ -80,7 +89,6 @@ public class MainController {
 
             PickRFunctions PF1 = new PickRFunctions(model);
             PF1.execute();
-            //JOptionPane.showMessageDialog(null, null);
 
         } catch (ValidationException e) {
             JOptionPane.showMessageDialog(null, e.message);
@@ -166,24 +174,6 @@ public class MainController {
 
     }
 
-   // private class SourceTextField implements FocusListener {
-     //   @Override
-       // public void focusGained(FocusEvent e) {
-        //}
-
-     //   @Override
-       // public void focusLost(FocusEvent e) {
-         //   String pathString = view.getSourcePathTextField().getText();
-           // File filePath = new File(pathString);
-           // if (!filePath.isDirectory()) {
-             //   JOptionPane.showMessageDialog(null, "Not a valid path!");
-             //   model.setSourceDirectoryPath(null);
-              //  view.getSourcePathTextField().grabFocus();
-         //   } else {
-           //     model.setSourceDirectoryPath(filePath.toPath());
-         //   }
-      //  }
-  //  }
 
     private class ValidationException extends Exception {
 

@@ -1,6 +1,7 @@
 package laczo.services;
 
 import laczo.model.ListOfCells;
+import laczo.model.Model;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
@@ -24,7 +26,7 @@ public class importCells {
         return jfc.getSelectedFile();
     }
 
-    public static ListOfCells run() {
+    public static ListOfCells run(Charset charset) {
         File file = openFolder();
         List<String> cellList = null;
         ListOfCells listOC = new ListOfCells();
@@ -32,7 +34,7 @@ public class importCells {
         if (file != null) {
             try {
                 FileInputStream fis = new FileInputStream(file);
-                cellList = Files.lines(file.toPath(), StandardCharsets.UTF_8)
+                cellList = Files.lines(file.toPath(), charset)
                         .collect(Collectors.toList());
 
                 for (String s : cellList) {

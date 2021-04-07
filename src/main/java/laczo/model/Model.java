@@ -1,6 +1,8 @@
 package laczo.model;
 
 import javax.swing.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
 /**
@@ -18,6 +20,15 @@ public class Model {
     private String exculdeFileNameLike;
     private DefaultListModel<String> cellListViewModel = new DefaultListModel<>();
     private ListOfCells listOfCells = new ListOfCells();
+    private Charset charset = StandardCharsets.UTF_8;
+
+    public Charset getCharset() {
+        return charset;
+    }
+
+    public void setCharset(Charset charset) {
+        this.charset = charset;
+    }
 
     public Path getSourceDirectoryPath() {
         return sourceDirectoryPath;
