@@ -27,16 +27,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eec5767-ba31-4c9e-b334-10b8bf7bb5b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="3eec5767-ba31-4c9e-b334-10b8bf7bb5b8" name="Default Changelist" comment="import cells charset can be set">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/ExcelWriter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/LicenseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/LicenseValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/services/PickRFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/laczo/view/ProgressView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/laczo/view/ProgressView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,12 +55,12 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1eIqZ4A3iWIMgDYVxlhy2GrY9qi" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -79,12 +76,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE" value="left" />
-    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="298" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="134" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE" value="right" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="317" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="232" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587413713492" />
@@ -200,6 +197,14 @@
       <workItem from="1603984971209" duration="1349000" />
       <workItem from="1604002341538" duration="595000" />
       <workItem from="1617363144489" duration="1199000" />
+      <workItem from="1617876731890" duration="590000" />
+      <workItem from="1632122762008" duration="1753000" />
+      <workItem from="1638474179721" duration="356000" />
+      <workItem from="1639237969292" duration="1693000" />
+      <workItem from="1639378842327" duration="2290000" />
+      <workItem from="1640452104621" duration="18000" />
+      <workItem from="1641998515378" duration="1766000" />
+      <workItem from="1642001807655" duration="1535000" />
     </task>
     <task id="LOCAL-00001" summary="progress dialoge added">
       <created>1546107816883</created>
@@ -306,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587413700302</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="import cells charset can be set">
+      <created>1617824872112</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617824872112</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -372,7 +384,8 @@
     <MESSAGE value="bug fixed, missing sheet exception added&#10;(Swingworker doInBackground method jumps to Done instead of printing stacktrace)" />
     <MESSAGE value="identification modified" />
     <MESSAGE value="import cell list view model refresh bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="import cell list view model refresh bug fixed" />
+    <MESSAGE value="import cells charset can be set" />
+    <option name="LAST_COMMIT_MESSAGE" value="import cells charset can be set" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -10,7 +10,7 @@ import java.util.Date;
 
 public final class LicenseValidator {
 
-    private static final String DEADLINE = "2021-12-01";
+    private static final String DEADLINE = "2022-06-01";
 
     public static boolean isValid() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");

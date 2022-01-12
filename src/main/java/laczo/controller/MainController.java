@@ -44,7 +44,7 @@ public class MainController {
             }
         });
 
-        view.getImportCellCharsetComboBox().addActionListener(f ->setImportCellsCharset());
+        view.getImportCellCharsetComboBox().addActionListener(f -> setImportCellsCharset());
     }
 
     private void setImportCellsCharset() {
@@ -55,24 +55,26 @@ public class MainController {
 
 
     public void validateFields() throws ValidationException {
-        String idRowText =  view.getIdRowTextField().getText();
+        String idRowText = view.getIdRowTextField().getText();
         try {
-            if (!idRowText.equals("")) {Integer.parseInt(idRowText);}
+            if (!idRowText.equals("")) {
+                Integer.parseInt(idRowText);
+            }
         } catch (NumberFormatException n) {
             throw new ValidationException("IdRow Field Problem!");
         }
     }
 
-    public void validateModel() throws ValidationException{
-       if (model.getSourceDirectoryPath()==null) throw new ValidationException("Source directory problem!");
-       if (model.getOutputFilePath()==null) throw new ValidationException("Output directory problem!");
+    public void validateModel() throws ValidationException {
+        if (model.getSourceDirectoryPath() == null) throw new ValidationException("Source directory problem!");
+        if (model.getOutputFilePath() == null) throw new ValidationException("Output directory problem!");
     }
 
     public void bindViewFieldsToModel() {
         model.setExculdeFileNameLike(view.getExclusionsTextField().getText());
         model.setIdSheetName(view.getIdSheetNameTextField().getText());
         model.setIdCellColumn(view.getIdColTextField().getText());
-        String idRowText =  view.getIdRowTextField().getText();
+        String idRowText = view.getIdRowTextField().getText();
         if (idRowText.equals("")) {
             model.setIdCellRow(null);
         } else {
@@ -162,13 +164,21 @@ public class MainController {
 
             JPopupMenu menu = new JPopupMenu();
             JMenuItem itemRemove = new JMenuItem("Remove");
+            JMenuItem itemRemoveAll = new JMenuItem("Remove all");
             itemRemove.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (view.getCellList().getSelectedIndex() > -1)
                         removeCellFromList(view.getCellList().getSelectedIndex());
                 }
             });
+            itemRemoveAll.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    model.getListOfCells().clear();
+                    model.getCellListViewModel().clear();
+                }
+            });
             menu.add(itemRemove);
+            menu.add(itemRemoveAll);
             menu.show(view.getCellList(), e.getPoint().x, e.getPoint().y);
         }
 
