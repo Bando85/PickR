@@ -2,9 +2,9 @@
     node {
         def remote = [:]
           remote.name = 'test'
-          remote.host = 'test.domain.com'
-          remote.user = 'root'
-          remote.password = 'password'
+          remote.host = '192.168.1.4'
+          remote.user = 'pi'
+          remote.password = 'hNjm647'
           remote.allowAnyHosts = true
           stage('Remote SSH') {
             writeFile file: 'abc.sh', text: 'ls -lrt'
