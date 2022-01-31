@@ -1,6 +1,4 @@
 
-pipeline {
-
     node {
         def remote = [:]
           remote.name = 'test'
@@ -13,5 +11,3 @@ pipeline {
             sshPut remote: remote, from: 'abc.sh', into: '.'
           }
     }
-
-}
