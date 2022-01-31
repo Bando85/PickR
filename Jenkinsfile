@@ -8,6 +8,6 @@
           remote.allowAnyHosts = true
           stage('Remote SSH') {
             writeFile file: 'abc.sh', text: 'ls -lrt'
-            sshPut remote: remote, from: 'abc.sh', into: '.'
+            sshPut remote: remote, from: 'abc.sh', into: '~/share'
           }
     }
